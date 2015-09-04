@@ -1,0 +1,81 @@
+<html>
+	<head>
+		<title>CS490 jQuery Lecture 2</title>
+		<style type='text/css'>
+			p, i {width:600px}
+ 			div {display:none;}
+			li {margin-bottom:20px; width:600px}
+			#slide1 {display:block}
+			.red {color:red}
+			.blue {color:blue}
+			.big {overflow:scroll}
+			.log {margin:0}
+		</style>
+		<script src='slideshow.js'></script>
+	</head>
+	<body>
+  <div>
+  <h3>Encapsulation of document.createElement</h3>
+  <a target='_blank' href='demoCreateElement.html'>demoCreateElement.html</a><br/><br/>
+  </div>
+  
+  <div>
+  <h3>Regular expressions</h3>
+  <a target='_blank' href='https://regex101.com/'>Regular expression tutorial</a><br/>
+  <pre>
+<span class='red'>/</span>^[^&lt;]*(&lt;.+&gt;)[^&gt;]*$/  
+Start of a regular expression literal
+
+/<span class='red'>^</span>[^&lt;]*(&lt;.+&gt;)[^&gt;]*$/  
+Anchor for beginning of line
+
+/^<span class='red'>[^&lt;]</span>*(&lt;.+&gt;)[^&gt;]*$/  
+Character class contain everything but <
+
+/^[^&lt;]<span class='red'>*</span>(&lt;.+&gt;)[^&gt;]*$/  
+Character class occurs zero or more times
+
+/^[^&lt;]*<span class='red'>(</span>&lt;.+&gt;)[^&gt;]*$/  
+Begin matching group. Accessed using m[1]
+
+/^[^&lt;]*(<span class='red'>&lt;</span>.+&gt;)[^&gt;]*$/
+Match a &lt;
+
+/^[^&lt;]*(&lt;<span class='red'>.+</span>&gt;)[^&gt;]*$/  
+Match one or more characters (greedy)
+
+/^[^&lt;]*(&lt;.+<span class='red'>&gt;</span>)[^&gt;]*$/  
+Match a &gt;
+
+/^[^&lt;]*(&lt;.+&gt;<span class='red'>)</span>[^&gt;]*$/  
+End of matching group
+
+/^[^&lt;]*(&lt;.+&gt;)<span class='red'>[^&gt;]*</span>$/  
+Match all zero or more characters that aren't &gt;
+
+/^[^&lt;]*(&lt;.+&gt;)[^&gt;]*<span class='red'>$</span/
+Anchor for end of line
+
+/^[^&lt;]*(&lt;.+&gt;)[^&gt;]*$<span class='red'>/</span>
+End of regular expression literal
+
+  </pre>
+  <a target='_blank' href='http://www.regular-expressions.info/examples.html'>Examples</a><br/>
+  </div>
+  
+  <div>
+  <h3>DOM hierarchy</h3>
+  <a target='_blank' href='https://dom.spec.whatwg.org/'>DOM interface hierarchy</a>
+  <p>document.createElement() is a method of Document</p>
+  <p>document.childNodes vs document.children</p>
+  </div>
+  
+  <div>
+  <h3>To Do</h3>
+  <ol>
+  <li>Step through the code until you understand it.</li>
+  <li>Which examples given in the documentation of <a target='_blank' href='http://api.jquery.com/jQuery/#creating-new-elements'>creating new elements</a> no longer work</li>
+  </ol>
+  </div>
+    </body>
+</html>

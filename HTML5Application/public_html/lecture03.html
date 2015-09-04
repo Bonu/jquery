@@ -1,0 +1,68 @@
+<html>
+	<head>
+		<title>CS490 jQuery Lecture 3</title>
+		<style type='text/css'>
+			p, i {width:600px}
+ 			div {display:none;}
+			li {margin-bottom:20px; width:600px}
+			#slide1 {display:block}
+			.red {color:red}
+			.blue {color:blue}
+			.big {overflow:scroll}
+			.log {margin:0}
+		</style>
+		<script src='slideshow.js'></script>
+	</head>
+	<body>
+    <div>
+  <h3>Review</h3>
+  <p>The following are true statements about obj = new Foo();</p>
+  <ol>
+  	<li>obj.__proto__ === Foo.prototype</li>
+  	<li>Let x be a function in obj.__proto__.
+  	   <ol type='a'>
+  	   	<li>x is executed by calling obj.x().</li>
+  	   	<li>x almost certainly uses "this" somewhere.</li>
+  	   	<li>The value of "this" during the execution of x will be obj.</li>
+  	   	<li>obj.x = function(){} will override the x in obj.__proto__. </li>
+  	   </ol>
+  	</li>
+  </ol>
+  </div>
+
+    <div>
+  <h3>Review</h3>
+  <p>The following are true statements about</p>
+  <pre>
+   var obj = $("p");
+   obj.html("hello");	  
+  </pre>
+  <ol>
+  	<li>obj.length will equal the number of &lt;p&gt; elements.</li>
+  	<li>obj[n] will be the DOM element for the nth &lt;p&gt; element.</li>
+  	<li>obj.__proto__ === jQuery.prototype</li>
+  	<li>html is a function in obj.__proto__.
+  	   <ol type='a'>
+  	   	<li>html is executed by calling obj.html("hello").</li>
+  	   	<li>The value of "this" during the execution of html will be obj.</li>
+  	   	<li>html uses "this" to access the DOM elements of obj.</li>
+  	   	<li>obj.html = function(){} will override the html in obj.__proto__. Affects obj only. Will not affect future calls to new jQuery().</li>
+  	   	<li>jQuery.prototype.html = function(){} will affect obj <b>and</b> all future calls to new jQuery().
+  	   </ol>
+  	</li>
+  </ol>
+  </div>
+
+  <div>
+  <h3>Call functions when document loaded</h3>
+  <a target='_blank' href='demoReady.html'>demoReady.html</a><br/><br/>
+  </div>
+  <div>
+  <h3>To Do</h3>
+  <ol>
+  <li>Step through the code until you understand it.</li>
+  <li>Which examples given in the documentation of <a target='_blank' href='https://api.jquery.com/ready/'>ready</a> no longer work?</li>
+  </ol>
+  </div>
+    </body>
+</html>

@@ -1,0 +1,85 @@
+<html>
+	<head>
+		<title>CS490 jQuery Lecture 5</title>
+		<style type='text/css'>
+			p, i {width:600px}
+ 			div {display:none;}
+			li {margin-bottom:20px; width:600px}
+			#slide1 {display:block}
+			.red {color:red}
+			.blue {color:blue}
+			.big {overflow:scroll}
+			.log {margin:0}
+			table {border-collapse:collapse}
+		</style>
+		<script src='slideshow.js'></script>
+	</head>
+	<body>
+  <div>
+  <h3>Review function contexts (this)<br/>
+  Dying the cloth analogy</h3>
+  <table border='1px'>
+  	<tr><th>Constructor</th><th>Example</th></tr>
+  	<tr><td>Window</td><td><a target='_blank' href='demojQuery.html'>demojQuery.html</a> (line 4 of jquery.0.1.js)</td>
+  	<tr><td>Object</td><td><a target='_blank' href='demojQuery.html'>demojQuery.html</a> (line 4 of jquery.0.1.js)</td></tr>
+  	<tr><td>Object</td><td><a target='_blank' href='demoClick.html'>demoClick.html</a> (line 20 of jquery.0.4.js)</td></tr>
+  	<tr><td>HTMLDivElement</td><td><a target='_blank' href='demoClick.html'>demoClick.html</a> (line 13 of demoClick.html)</td></tr>
+  	<tr><td>HTMLDocument</td><td><a target='_blank' href='demoReady.html'>demoReady.html</a> (line 15 of demoReady.html)</td></tr>
+  	<tr><td>Function</td><td><a target='_blank' href='demoNew.html'>demoNew.html</a> (line 12 of demoNew.html)</td></tr>
+  </table>
+  </div>
+  <div>
+  <h3>Review jquery-0.4.js</h3>
+  <table border='1px'>    
+  	<tr><th>Breakpoint line</th><th>Comment</th></tr>
+  	<tr><td>64</td><td><p>Could do <b>this[i]["on"+type] = fn</b> but look at handle function and see
+  	<a target='_blank' href='https://developer.mozilla.org/en-US/docs/Web/API/Event/preventDefault'>preventDefault</a> and 
+  	<a target='_blank' href='https://developer.mozilla.org/en-US/docs/Web/API/Event/stopPropagation'>stopPropagation</a>)<br/>
+  	In general, if an event handler returns false it is telling the browser to cancel the default behavior for that event. For example, the
+  	default behavior for a click event is to do the default action (e.g. toggle checkbox) and to propagate the click event up to parent elements. jQuery tests for a return
+  	of false so that it can make the cancellation of default behavior the same for all browsers and also free the event handler from having to do it.</p></td>
+  	<tr><td>21</td><td>Adds property guid to Function object</td></tr>
+	<tr><td>26</td><td>Adds property events to DOM object</td></tr>
+	<tr><td>26</td><td>Tells DOM to call jQuery.handle when mouse clicked on the DOM element;</td></tr>	
+	<tr><td>49</td><td><p>Notice the use of ===. Will only be true if handler function explicitly returns false. If == then would be true if handler function returned nothing.</p></td></tr>
+	<tr><td>16,20</td><td>
+  <p>Amrit noticed the following bug which I introduced. See <a target='_blank' href='http://puzzlecrowd.com/jquery/demoClickBugs.html'> 
+  demoClickBugs.html</a></p>
+  <pre>
+	var obj = $(".clickable");
+	obj.click(foo);
+	obj.click(foo);
+	obj.click(foo);
+	
+    function foo() {
+    	// will be called 2 times. 
+    	// Would expect it would be called either 1 time or 3 times.
+    }
+  </pre>
+	</td></tr>
+	<tr><td>66</td><td>
+  <p>I noticed the following bug which I introduced. See <a target='_blank' href='http://puzzlecrowd.com/jquery/demoClickBugs.html'> 
+  demoClickBugs.html</a></p>
+  <pre>
+   var obj = $(".clickable");
+   obj.click(foo).click(foo);
+  </pre>
+	</td></tr>
+	<tr><td>13 (of demoClick.html)</td><td><p>evt.srcElement === this, so why not use this instead (e.g., this.innerHTML) and not worry about whether there is a
+	srcElement property on the Event object passed by the browser?</p></td></tr>
+  </table>
+  </div>
+  <div>
+  <h3>attr and css functions</h3>
+  <a target='_blank' href='demoAttr.html'>demoAttr.html</a><br/><br/>
+  </div>
+  <div>
+  <h3>To Do</h3>
+  <ol>
+  <li>Step through the code until you understand it.</li>
+  <li>Which examples given in the documentation of <a target='_blank' href='http://api.jquery.com/attr/'>attr</a> and 
+  <a target='_blank' href='http://api.jquery.com/css/'>css</a> do not work in jquery1.0.js?</li>
+  </ol>
+  </div>
+    </body>
+</html>

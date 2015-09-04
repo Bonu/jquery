@@ -1,0 +1,280 @@
+<html>
+	<head>
+		<title>CS490 jQuery Lecture 1</title>
+		<style type='text/css'>
+			p, i {width:600px}
+ 			div {display:none;}
+			li {margin-bottom:20px; width:600px}
+			#slide1 {display:block}
+			.red {color:red}
+			.blue {color:blue}
+			.big {overflow:scroll}
+			.log {margin:0}
+			.red {color:red}
+		</style>
+		<script src='slideshow.js'></script>
+	</head>
+	<body>
+	<!----------- Screen Title-------------->
+	<div>
+		<h3 align='center'>Exploring jQuery</h3>
+		<h3 align='center'>The natural tendency of the mind is to go to finer and finer levels of awareness</h3>
+		<p>The purpose of this course is threefold</p>
+		<ol>
+		<li>To become expert at using a debugger to look at JavaScript code</li>
+        <li>To look at code of an expert programmer.</li>
+        <li>To get more comfortable with jQuery</li>
+        </ol>
+		<p>
+	</div>
+	
+	<!-- Course Materials -->	  
+	<div>
+	  <h3>Course Materials, A Field of All Possibilities for you to Play in</h3>
+	  <p>Have provided</p>
+	   <ol>
+	    <li>Source code of 96 versions of jQuery</li>
+	    <li>Google</li>
+	    <li>Study environment (help each other)</li>
+	    <li>Tech support (I will answer questions)</li>
+	    <li>Challenges</li>
+	    <li>Expectations</li>
+	  </ol>
+  </div>
+  
+  <!--div>
+  	<h3>Inspiration to do the work</h3>
+  	<p>From the end of another textbook:</p>
+  	<p><i>
+  	"Congratulations! You are at the end of this guide. Not everyone has the <span class="red"> discipline</span> to do what you have done, to learn what you have learned. Take a quick moment and give yourself a pat on the back. This hard work has paid off: you are now an Javascript developer."</i>
+  	<p>To help with the discipline, I will meet briefly with students each day to see how they are doing. You will upload your latest project to the network and I will open it on my computer in the back of the room so I can look at it and ask some questions. Think of this as a mini-interview.</p>  	
+  </div-->
+  
+  
+  <!--*************** Grading policy ***************-->
+  <div>
+    <h3>Grading policy</h3>
+    <ol>
+    	<li>Class participation 50%. Mainly showing up and talking to me.</li>
+    	<li>Final exam in two parts (50%)
+    		<ol type='a'>
+    		   <li>Written, closed book and computer to test your understanding of the JavaScript new function. (10%)</li>
+    		   <li>Will be asked questions about one of the jQuery releases other than jquery-1.0.js (40%). 
+    	        Use of computer is allowed but no collaboration!</li>
+    	    </ol>
+    	</li>
+    </ol>
+  </div>
+  
+  <!--*************** Course textbook ***************-->
+  <div>
+    <h3>Course textbooks</h3>
+    <ol>
+    <li>jquery-1.0.js</li>
+    <li>google.com</li>
+    </ol>
+  </div> 
+
+  <div>
+  	<h3>Steps of progress</h3>
+  	<ol>
+  		<li>$(".update")</li>
+  		<li>$("&lt;p&gt;")</li>
+  		<li>$(foo)</li>
+  		<li>$(".clickable").click(foo);</li>
+  		<li>$("<p>").attr("id", "bob").css("background-color", "red");</li>
+  		<li>Utility functions: jQuery.extend, jQuery.each, jQuery.map, jQuery.grep</li>
+  		<li>Ajax</li>
+  		<li>Implementing document.querySelectorAll()</li>
+  		<li>Evolution of the jQuery.prototype.attr() function</li>
+  		<li>Show off what you learned</li>
+  	</ol>
+  </div>
+
+  <div>
+    <h3>jQuery in a nutshell</h3>
+    <a target='_blank' href='demojQuery.html'>demojQuery.html</a><br/></br>
+  </div>
+    
+  <div>
+  <h3>Five ways to set <i>this</i></h3>
+  <a target='_blank' href='demoThis.html'>demoThis.html</a><br/>
+  <ol>
+  	<li>Use object when calling function</li>
+  	<li>Use <a href='https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/call'>call</a>
+  	<li>Use <a href='https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply'>apply</a></li>
+  	<li>Use <a href='https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind'>bind</a></li>
+  	<li>If none of the above <i>this</i> will be Window.</li>
+  </ol>
+<pre>  
+&lt;html&gt;
+&lt;head&gt;
+&lt;script type='text/javascript'&gt;
+	function foo(n1, n2) {
+		alert(this.test);
+	}
+
+	function useObject() {
+		obj = {test:"Using object"};
+		obj.foo = foo;
+		obj.foo(1, 2);
+	}
+	
+	function useApply() {
+		foo.apply({test:"Using apply"}, [1, 2]);
+	}
+
+	function useCall() {
+		foo.apply({test:"Using call"}, [1, 2]);
+	}
+
+	function useBind() {
+		var foobind = foo.bind({test:"Using bind"}, 1, 2);
+		foobind();
+	}
+	
+	function useGlobal() {
+		window.test = "Using global";
+		foo(1, 2);
+	}
+&lt;/script&gt;
+&lt;/head&gt;
+&lt;body onload="init()"&gt;
+	&lt;button onclick="useObject()"&gt;Use object&lt;/button&gt;&lt;br/&gt;
+	&lt;button onclick="useApply()"&gt;Use apply&lt;/button&gt;&lt;/br&gt;
+	&lt;button onclick="useCall()"&gt;Use call&lt;/button&gt;&lt;/br&gt;
+	&lt;button onclick="useBind()"&gt;Use bind&lt;/button&gt;&lt;/br&gt;
+	&lt;button onclick="useGlobal()"&gt;Use global object&lt;/button&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+  </div>
+
+ 
+  <div>
+  <h3>The new operator</h3>
+  <a target='_blank' href='demoNew.html'>demoNew.html</a><br/><br/>
+<pre>
+<html>
+<head>
+&lt;script type='text/javascript'&gt;
+  function Foo() {
+    this.a = 5;
+    this.b = "hello";
+    // return {c:"abc"}
+  }
+
+// These should be declared outside of Foo. Otherwise there will be a copy for each object created.
+  Foo.log = function(value) {console.log(value)};  // "static" method
+
+  Foo.prototype = {	// line 62
+     toString: function() {Foo.log("a=" + this.a + ", b=" + this.b)}  // instance method
+  }
+  
+  function demo() {
+    var obj;  	
+  	
+    obj1 = new Foo();
+    obj1.toString();
+
+<span class='red'>
+// Memorize the code in red and be able to answer questions about it
+// The following is equivalent to obj3 = new Foo();  	
+    function _new(constructor) {
+      var obj = Object.create(constructor.prototype);  // set obj.__proto__ to constructor.prototype
+      var temp = constructor.apply(obj);               // obj will be context available to constructor
+      if (temp) {  // if constructor returns something use that (non-standard behavior)
+        obj = temp;
+      }
+      return obj;
+    }
+</span>  	 
+    var obj3 = _new(Foo); 
+  	  	
+    debugger;
+  }
+&lt;/script&gt;
+&lt;/head&gt;
+&lt;body onload="demo()"&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+  </div>
+  
+  <div>
+  <h3>Array-like</h3>
+  <a target='_blank' href='demoArrayLike.html'>demoArrayLike.html</a><br/><br/>
+<pre>
+&lt;html&gt;
+&lt;head&gt;
+&lt;script type='text/javascript'&gt;
+function init() {
+   var a, obj, i, prop;
+	
+   a = ["up", "down", "left", "right"];
+   obj = {0:"up", 1:"down", 2:"left", 3:"right"};  // <b>Show in watch window</b>
+   for (prop in obj) {
+      console.log(obj[prop]);
+   }
+   for (i=0; i<4; i++) {    // <b>no length so need to hard-code 4</b>
+      console.log(obj[i]);   
+   }
+   obj={};
+   obj.length = 0;
+   new Array().push.apply(obj, a);	// <b>Show in watch window</b>
+   // [].push(apply(obj, a);  // uses array literal instead
+   for (i=0; i&lt;obj.length; i++) {
+      console.log(obj[i]);
+   }
+	
+   obj.splice = [].splice;	// <b>Show in watch window (notice Object[4])</b>
+   obj.splice(1, 2);       // remove "down", "left"
+   for (i=0; i&lt;obj.length; i++) {
+      console.log(obj[i]);
+   }	
+}
+&lt;/script&gt;
+&lt;/head&gt;
+&lt;body onload="init()"&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+</pre>
+  </div>
+  
+  <div>
+  <h3>Document Object Model (DOM)</h3>
+  
+  <a target='_blank' href='https://developer.mozilla.org/en-US/docs/Web'>Documentation</a><br/><br/>
+  <a target='_blank' href='https://dom.spec.whatwg.org/'>DOM interface hierarchy</a><br/>
+  
+  <a target='_blank' href='https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementById'>document.getElementById (interface Document)</a><br/>
+  <a target='_blank' href='https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementsByTagName'>document.getElementsByTagName (interface Document)</a><br/>
+  <a target='_blank' href='https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementsByClassName'>document.getElementsByClassName (interface Document)</a><br/>
+  
+  <p>The above can be replaced by</p>
+  <a target='_blank' href='https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelectorAll'>document.querySelectorAll (interface Node)</a><br/><br/>
+  
+  <a target='_blank' href='https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML'>document.innerHTML</a><br/>
+
+  
+  
+  <p>Initial release of jQuery was in 2006</p>
+
+  <p>However, IE was the last browser to implement querySelector/querySelectorAll. Its 8th version was released in 2009.</p>
+  
+  <p>Therefore, jquery-1.0.js opted not to use querySelectorAll so that it could provide cross-browser compatibility.</p>
+  
+  <p>document.querySelectorAll first appeared in jQuery in version 1.3.1</p>
+  </div>
+  <div>  
+  <h3>To Do</h3>
+  <ol>
+  <li>Step through the <a target='_blank' href='demojQuery.html'>demojQuery.html</a> until you understand it.</li>
+  <li>Which examples given in the documentation of <a target='_blank' href='http://api.jquery.com/jQuery/'>jQuery()</a> do not work in jquery-1.0.js</li>
+  <li>Use src="../jQueryVersions/jquery-1.0.js" instead of src="../jQueryVersions/jquery-0.1.js" in demojQuery.html and step into it using the debugger.</li>
+  </ol>
+  </div>
+  </div>
+</body>
+</html>
