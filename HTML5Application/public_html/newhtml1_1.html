@@ -44,7 +44,7 @@
     function Student(){};
     
     Student.prototype = new Person1();
-    Student.prototype = Object.create(Person1);
+    Student.prototype = Object.create(p);
     var student = new Student();
     
     alert(student.message());
