@@ -1,0 +1,19 @@
+<html>
+<head>
+    <script src="js/libs/jquery/jquery-0.4.js"></script>
+<!--script src="jQueryVersions/jquery-1.0.js"></script-->
+<script type='text/javascript'>
+function demo() {
+	$(".clickable").click(foo);
+}
+
+function foo(evt) {
+	console.log(evt.srcElement.innerHTML + " clicked");
+        document.write("foo event");
+}
+</script>
+</head>
+<body onload="demo()">
+<div class='clickable'>Hello</div>
+<div class='clickable'>Goodbye</div>
+</body>
