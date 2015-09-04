@@ -7,13 +7,14 @@ function demo() {
 	$(".clickable").click(foo);
 }
 
-function foo(evt) {
-	console.log(evt.srcElement.innerHTML + " clicked");
-        document.write("foo event");
+function foo() {
+	console.log("Foo is clicked");
+       // document.write("foo event");
 }
 </script>
 </head>
 <body onload="demo()">
 <div class='clickable'>Hello</div>
 <div class='clickable'>Goodbye</div>
+<input type="checkbox" class="clickable" />
 </body>
