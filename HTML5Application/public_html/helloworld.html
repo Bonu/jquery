@@ -10,7 +10,18 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script type="text/javascript" src="js/libs/jquery/jquery-0.1.js"></script>
-        <script type="text/javascript" src="js/libs/custom/helloworld.js"></script>
+<!--        <script type="text/javascript" src="js/libs/custom/helloworld.js"></script>
+        -->
+        <script type="text/javascript">
+            var vegetables = ['parsnip', 'potato'];
+            var moreVegs = ['celery', 'beetroot'];
+
+            // Merge the second array into the first one
+            // Equivalent to vegetables.push('celery', 'beetroot');
+            Array.prototype.push.apply(vegetables, moreVegs);
+
+            console.log(vegetables); // ['parsnip', 'potato', 'celery', 'beetroot']
+        </script>
         
     </head>
     <body>
