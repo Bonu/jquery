@@ -1,21 +1,22 @@
 <html>
 	<head>
-		<title>Demo attr and css</title>
+            <title>Demo attr and css</title>
+            <script type="text/javascript" src="js/jQueryVersions/jquery-0.5.js" ></script>	
+            <script type="text/javascript">
+                var el, id;
+                // debugger;
+                el = $("<p>");
+                el[0].innerHTML = "test";		// didn't want to add html function to jQuery.prototype
+                el.attr("id", "p1");
+                el.attr("class", "marker");
+                el.css("background-color", "red");
+                el.css("color", "yellow");
+                id = el.attr("id");
+                document.getElementById("container").appendChild(el[0]); // no append in jQuery.prototype yet.
+            </script>
 	</head>
 	<body>
 	<div id="container"></div>
 	</body>
-        <script type="text/javascript" src="js/jQueryVersions/jquery-0.5.js" ></script>	
-	<script type="text/javascript">
-            var el, id;
-            debugger;
-            el = $("<p>");
-            el[0].innerHTML = "test";		// didn't want to add html function to jQuery.prototype
-            el.attr("id", "p1");
-            el.attr("class", "marker");
-            el.css("background-color", "red");
-            el.css("color", "yellow");
-            id = el.attr("id");
-            document.getElementById("container").appendChild(el[0]); // no append in jQuery.prototype yet.
-	</script>
+        
 </html>
