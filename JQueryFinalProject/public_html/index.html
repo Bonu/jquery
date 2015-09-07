@@ -34,10 +34,21 @@
                     answer.addClass("anwer");
                     answer.attr("rows","8");
                     answer.attr("cols","80");
+                    if(! window.localStorage["answer"+index] === null ){
+                       // console.log(localStorage.getItem("answer"+index));
+                       ans
+                    }
                     $('body').append(answer);
 //                    document.write(temp.text());
 //                    document.write(answer.);
 
+                    $(function () {
+                        var editor = document.querySelector("#answer"+index);
+                        if (window.localStorage["answer"+index]) {
+                         editor.value = window.localStorage["answer"+index];
+                        }
+                     });
+                     
                     $(function() {
                         var editor = document.querySelector("#answer"+index);
                         editor.addEventListener("keyup", function() {
