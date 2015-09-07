@@ -66,17 +66,17 @@
                 jQuery(function(){
                     jQuery("#sendmailbtn").click(function() {
 //                      alert( "Handler for .click() called." );
-                        var answers = "";    
+                        var answers =  jQuery("<div>"); 
                         jQuery.each(exam,function(index, value){
                             index = index + 1;
 //                          alert(window.localStorage["answer"+index]);
                             var answer = "";
                             
                             answer = "[[["+window.localStorage["answer"+index]+"]]]";
-//                            answers.append(answer);
+                            answers.append(answer);
 //                            alert(answer.text);
 //                            alert(answer);
-                            answers = answers + '<br>'+ answer;
+//                            answers = answers + '<br>'+ answer;
                          });
                             var temp = jQuery("<div>");
                             temp.addClass("anwers");
