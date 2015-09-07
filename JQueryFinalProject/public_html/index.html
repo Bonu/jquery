@@ -4,16 +4,16 @@
 	<script type="text/javascript">
 	// Your code here. Please do not introduce any global variables
 	// Do not use an DOM properties or functions (e.g., innerHTML, getElementById)
-        var exam = [
-            "<p># I have modified the constructor function Foo of demoNew.html to take two parameters and use those parameters to initialize this.a and this.b</p>\n\n<p>The _new function no longer works because it assume that the constructor function has no parameters. Modify _new so it can pass parameters to the constructor function.</p>\n",
-            "<p># What happens if you comment out line 10 (this.length=0) of jquery-0.1.js?</p>\n",
-            "<p># Put a breakpoint at line 46 of jquery-0.4.js.</p>\n<ol type='a'>\n<li>What is the value of 'this' here?</li>\n<li>Why does it have that value?</li>\n</ol>\n",
-            "<p># Add a mouseup prototype function to jquery0.4.js. List the changes you had to make below.</p>\n",
-            "<p># The ability of JavaScript to add new properties to system objects (e.g. adding an events property to a\nDOM element as was done in jquery-0.4.js) has inspired me to make this exam dynamically updateable. </p>\n\n<p>Please add a question in the area below and provide its answer.</p>\n",
-            "<p># Put a breakpoint at line 56 of jquery-0.5.js. Add some code to demoAttr.html that will cause that\nbreakpoint to be hit.</p>\n",
-            "<p># Add an html method to jQuery.prototype in jquery-0.1.js. It is called as follows:</p>\n<pre>\nel = $('.someclass');\nel.html('<b>hello</b>');	// will set the innerHTML of each DOM element selected to '<b>hello</b>'\n</pre>\n",
-            "<p># Put a breakpoint at line 27 jquery-0.3.js. What does this line do?</p>\n",
-            "<p># This code crashes in demoClick.html</p>\n<pre>\nvar obj = $('.clickable');\nobj.click(foo).click(foo);\nPlease fix the problem.\n</pre>\n"
+            var exam = [
+                "<p># I have modified the constructor function Foo of demoNew.html to take two parameters and use those parameters to initialize this.a and this.b</p>\n\n<p>The _new function no longer works because it assume that the constructor function has no parameters. Modify _new so it can pass parameters to the constructor function.</p>\n",
+                "<p># What happens if you comment out line 10 (this.length=0) of jquery-0.1.js?</p>\n",
+                "<p># Put a breakpoint at line 46 of jquery-0.4.js.</p>\n<ol type='a'>\n<li>What is the value of 'this' here?</li>\n<li>Why does it have that value?</li>\n</ol>\n",
+                "<p># Add a mouseup prototype function to jquery0.4.js. List the changes you had to make below.</p>\n",
+                "<p># The ability of JavaScript to add new properties to system objects (e.g. adding an events property to a\nDOM element as was done in jquery-0.4.js) has inspired me to make this exam dynamically updateable. </p>\n\n<p>Please add a question in the area below and provide its answer.</p>\n",
+                "<p># Put a breakpoint at line 56 of jquery-0.5.js. Add some code to demoAttr.html that will cause that\nbreakpoint to be hit.</p>\n",
+                "<p># Add an html method to jQuery.prototype in jquery-0.1.js. It is called as follows:</p>\n<pre>\nel = $('.someclass');\nel.html('<b>hello</b>');	// will set the innerHTML of each DOM element selected to '<b>hello</b>'\n</pre>\n",
+                "<p># Put a breakpoint at line 27 jquery-0.3.js. What does this line do?</p>\n",
+                "<p># This code crashes in demoClick.html</p>\n<pre>\nvar obj = $('.clickable');\nobj.click(foo).click(foo);\nPlease fix the problem.\n</pre>\n"
             ];
             $.each(exam,function(index, value){
                 $(value).append("<div> hi there </div>");
@@ -34,10 +34,7 @@
                     answer.addClass("anwer");
                     answer.attr("rows","8");
                     answer.attr("cols","80");
-                    if(! window.localStorage["answer"+index] === null ){
-                       // console.log(localStorage.getItem("answer"+index));
-                       ans
-                    }
+                    
                     $('body').append(answer);
 //                    document.write(temp.text());
 //                    document.write(answer.);
@@ -55,6 +52,11 @@
                          window.localStorage["answer"+index] = editor.value;
                         });
                     });
+                });
+                $('body').append("<br><hr>");
+                $(function(){
+                    var r= $('<input type="button" value="Submit>>"/>');
+                    $("body").append(r);
                 });
             });
             
@@ -90,7 +92,6 @@
 //           }); 
 //           $(text1).appendTo("body");
 //        });
-// http://www.mkyong.com/jquery/how-to-add-remove-textbox-dynamically-with-jquery/
 
 
          </script>
