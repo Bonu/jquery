@@ -1,0 +1,105 @@
+<html>
+	<head>
+		<title>CS490 jQuery Lecture 7</title>
+		<style type='text/css'>
+			p, i {width:600px}
+ 			div {display:none;}
+			li {margin-bottom:20px; width:600px}
+			#slide1 {display:block}
+			.red {color:red}
+			.blue {color:blue}
+			.big {overflow:scroll}
+			.log {margin:0}
+		</style>
+		<script src='slideshow.js'></script>
+	</head>
+	<body>
+  <div>
+  <h3>Review</h3>
+    <p>Nice resource: <a target='_blank' href='https://learn.jquery.com/'>https://learn.jquery.com/</a></p>
+  <ol>
+  	<li>Mock exam <a target='_blank' href='answersMockExam.txt'>answer</a></li>
+  	<li><p>A simple workaround to the same-origin policy</p>
+  		<p><a target='_blank' href='demoJSONP.html'>demoJSONP.html</a> (run on your local machine)</p>
+  		<ol type='a'>
+  			<li>Scripts can come from anywhere, e.g.<br/> 
+  			<b>&lt;script src="http://code.jquery.com/jquery-1.11.3.js"&gt;&lt;script&gt;</b></li>
+  			<li>Create a script element and set its source to any URL (same-origin restrictions do not apply here.)</li>
+  			<li>Append the script element to the &lt;body&gt; element and it will be executed</li>
+  			<li><p>The script calls a global function defined by and passes it a JSON string. In order
+  			for this to work you need to know the name of the function called by the script and what
+  			is in the JSON string.</p></li>
+  			<li>The global function called by the script parses its JSON parameter and sets the result
+  			to a global variable.</li>
+  			<li>This global variable will be available to the script's onload function.</li>
+  		</ol>
+	</li>
+	<li><p>Here is a real example using <a target='_blank' href='https://developer.yahoo.com/yql'>YQL</a> (Yahoo Query Language).</p>
+	<p><a target='_blank' href='demoYahoo.html'>demoYahoo.html</a></p></li>
+	<li>There are security concerns with JSONP because a strange script is calling a function defined on your page. A more
+	secure alternative is <a target='_blank' href='https://en.wikipedia.org/wiki/Cross-origin_resource_sharing'>CORS</a>
+	(Cross-origin resource sharing)</a>.
+	<!--
+	<li><p>JSONP is a
+  	<pre>
+  	breakpoints
+  	9859 (create callback variable with prefix jQuery.expando)
+  	9802 (document.createElement("script")
+  	9837 (insert script)
+  	9815 (called when script is loaded)
+  	9265 (get response)
+  	9902 window[ callbackName ] = function() {
+			responseContainer = arguments;  (in closure of jQuery.ajaxPrefilter)
+			}
+	9894 returns value of responseContainer
+		};
+	</pre>
+  	</li>
+  -->
+  </ol>
+  </div>
+  <div>
+  <h3>Generating event handler function (click, etc)</h3>
+  <p>In the exam, adding the mouseup function to bind a mouseup event to a DOM object just involved copying and pasting the code
+  for click and changing "click" to "mouseup". jQuery avoids this copying and pasting by creating the
+  event binding functions in a loop.</p>
+  <a target='_blank' href='demoEventBinders.html'>demoEventBinders.html</a> (put breakpoint at line 100 of jquery-0.7.js)<br/><br/>
+  </div>
+  <div>
+  <h3>extend function</h3>
+  <p>jQuery is designed to make adding plugins easy. The extend function is used to add
+  static and prototype functions to jQuery. It is also used by jQuery to initialize itself.</p>
+  <ol>
+	<li><a target='_blank' href='demoExtend1.html'>demoExtend1.html</a> (using global extend)</li>  
+	<li><a target='_blank' href='demoExtend2.html'>demoExtend2.html</a> (using constructor function Foo)</li>  
+	<li><a target='_blank' href='demoExtend3.html'>demoExtend3.html</a> (using jquery-0.7.js)</li>  
+  </ol>
+  </div>
+  <div>
+  <h3>each function</h3>
+  <p>A language with first-class functions (such as JavaScript) permits the definition of a function that takes two arguments,
+  a function object F and any object X. The function then iterates through X passing each value to F. In 
+  this way the function F does not need a loop, the loop is in the function that calls F.</p>
+  <p>In jQuery, this function is named "each"</p>
+  <ol> 
+  	<li><a target='_blank' href='demoEach1.html'>demoEach1.html</a></li>
+  	<li><a target='_blank' href='demoEach2.html'>demoEach2.html</a></li>
+  	<li><a target='_blank' href='demoEach3.html'>demoEach3.html</a></li>
+  	<li><a target='_blank' href='demoEach4.html'>demoEach4.html</a> (using constructor function Foo with prototype each)</li>
+  	<li><a target='_blank' href='demoEach5.html'>demoEach5.html</a> (using constructor function Foo with static and prototype each)</li>
+  	<li><a target='_blank' href='demoEach6.html'>demoEach6.html</a> (using jquery-0.7.js)</li>
+  	<li><a target='_blank' href='demoAttrEach.html'>demoAttrEach.html</a></li>
+  </ol>
+  </div>
+  <div>
+  <h3>To Do</h3>
+  <ol>
+  	<li><p>Step through the demos using the debugger until you understand them.</p></li>
+  	<li><p>Add the map function of jquery-1.0.js to jquery-0.7.js and test it. Note that in jquery-1.11.3.js
+  	there both static and prototype versions of "map" but in jquery-1.0.js there is only a static
+  	version.</p></li>
+  	<li>Add the grep function of jquery-1.0.js to jquery-0.7.js and test it.</li>
+  </ol>
+  </div>
+    </body>
+</html>

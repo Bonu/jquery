@@ -1,0 +1,24 @@
+<html>
+<head>
+<script type='text/javascript'>
+	function sum(a) {
+		var i, n;
+		n = 0;
+		for (i=0; i<a.length; i++) {
+			n += a[i];
+		}
+		console.log(n); 
+	}
+
+	function each(f, a) {
+		f(a);
+	}
+
+	each(sum, [1, 2, 3, 4]);
+</script>
+</head>
+<body>
+<p>Check console</p>
+</body>
+</html>
+

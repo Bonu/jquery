@@ -1,0 +1,23 @@
+<html>
+<head>
+<script type='text/javascript'>
+	function square(n) {
+		console.log(n*n); 
+	}
+
+	function each(f, a) {
+		var i;
+		for (i=0; i<a.length; i++) {
+			f(a[i]);
+		}
+	}
+	
+	// Apply function square to each element of the 2nd argument
+	each(square, [1, 2, 3, 4]);
+</script>
+</head>
+<body>
+<p>Check console</p>
+</body>
+</html>
+

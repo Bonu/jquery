@@ -1,0 +1,42 @@
+<html>
+	<head>
+		<title>CS490 jQuery Lecture 6</title>
+		<style type='text/css'>
+			p, i {width:600px}
+ 			div {display:none;}
+			li {margin-bottom:20px; width:600px}
+			#slide1 {display:block}
+			.red {color:red}
+			.blue {color:blue}
+			.big {overflow:scroll}
+			.log {margin:0}
+		</style>
+		<script src='slideshow.js'></script>
+	</head>
+	<body>
+  <div>
+  <h3>Review</h3>
+  <ol>
+  <li><a target='_blank' href='jQueryVersions/jquery-0.4.js'>jQueryVersions/jquery-0.4.js</a> contains the
+  correct version of jquery-0.4.js that was used in lecture 4. It is different from the version in jQueryVersions.zip.</li>
+  <li>jquery-0.5.js 66: jQuery.prototype.attr calls jQuery.attr. Avoids code duplication without cluttering the prototype.</li>
+  <li>jquery-0.5.js 76: jQuery.prototype.css uses jQuery.prototype.attr which also avoids code duplication</li>
+  <li>jquery-0.5.js 29: new fix object is created each time attr is called. Should be jQuery.fix</li>
+  </ol>
+  </div>
+
+  <div>
+  <h3>$.ajax</h3>
+  <a target='_blank' href='demoAjax.html'>demoAjax.html</a><br/><br/>
+  </div>
+  
+  <div>
+  <h3>Network tab of Developer Tools</h3>
+  <ol>
+  	<li>Go into Developer Tools</li>
+  	<li>Click the Network tab</li>
+  	<li>Clear it by clicking the icon of a circle with a line through it</>
+  	<li>Return to page and refresh</li>
+  	<li>Return to Developer Tools and observe network activity</li>
+  </ol>
+  </

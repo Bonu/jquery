@@ -1,0 +1,46 @@
+<html>
+<head>
+</head>
+<body>
+<p>1</p>
+<p>2</p>
+<p>3</p>
+<p>4</p>
+<script src='jQueryVersions/jquery-0.7.js'></script>
+<script type='text/javascript'>
+	var obj, n, elements, ps, each;
+	
+	sum = 0;
+	
+	ps = $("p");
+	ps.each(sumAll);	// sum numbers in all paragraphs
+	console.log(sum);
+
+	sum = 0;
+	ps.each(sumEven);	// sum numbers in even numbered paragraphs
+	console.log(sum);
+	
+	// Just use jQuery.each to sumAll
+	sum = 0;
+	elements = document.querySelectorAll("p");
+	jQuery.each(elements, sumAll);	// 
+	console.log(sum);
+	
+	// Just use jQuery.each to sumEven
+	sum = 0;
+	jQuery.each(elements, sumEven);
+	console.log(sum);
+	
+	function sumAll() {
+		sum += parseInt(this.innerHTML); // sum in closure
+	}
+	
+	function sumEven(i, obj) {
+		if (i%2 === 0) {
+			sum += parseInt(obj.innerHTML);
+		}
+	}
+</script>
+</body>
+</html>
+

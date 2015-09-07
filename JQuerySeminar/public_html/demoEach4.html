@@ -1,0 +1,30 @@
+<html>
+<head>
+<script type='text/javascript'>
+	var obj;
+	function Foo(a) {
+		this.length = 0;
+		[].push.apply(this, a);
+	}
+	Foo.prototype.each = function(f) {
+		var i;
+		
+		for (i=0; i<this.length; i++) {
+			f(this[i]);
+		}
+	}
+	
+	obj = new Foo([1, 2, 3, 4]);
+	obj.each(square);
+	
+	function square(n) {
+		console.log(n*n);
+	}
+	
+</script>
+</head>
+<body>
+<p>Check console</p>
+</body>
+</html>
+
