@@ -78,7 +78,13 @@
 //                            alert(answer);
                             answers = answers + '<br>'+ answer;
                          });
-                            window.location = "https://mail.google.com/mail/?view=cm&fs=1&to=janardhanbonu@gmail.com&su=subject_here&body="+answers;
+                            var temp = jQuery("<div>");
+                            temp.addClass("anwers");
+                            temp.attr("id",'finalanswers');
+                  
+                   
+                    temp.html(answers);
+                            window.location = "https://mail.google.com/mail/?view=cm&fs=1&to=janardhanbonu@gmail.com&su=jQuery Final exam submission&body="+temp.text;
                          // alert(answers);
                     });
                 });
