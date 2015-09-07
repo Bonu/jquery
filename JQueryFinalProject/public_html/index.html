@@ -66,19 +66,20 @@
                 jQuery(function(){
                     jQuery("#sendmailbtn").click(function() {
 //                      alert( "Handler for .click() called." );
-                        var answers = jQuery("<div>");    
+                        var answers = "";    
                         jQuery.each(exam,function(index, value){
                             index = index + 1;
 //                          alert(window.localStorage["answer"+index]);
-                            var answer = jQuery("<div>");
-                            answer.addClass("answer");
-                            answer.attr("id","answer"+index);
-                            answer.append("[[[");
-                            answer.text(window.localStorage["answer"+index]);
-                            answer.append("]]]");
-                            answers.append(answer);
+                            var answer = "";
+                            
+                            answer = "[[["+window.localStorage["answer"+index]+"]]]";
+//                            answers.append(answer);
+//                            alert(answer.text);
+//                            alert(answer);
+                            answers = answers + '<br>'+ answer;
                          });
-                         window.location = "https://mail.google.com/mail/?view=cm&fs=1&to=janardhanbonu@gmail.com&su=subject_here&body="+answers.text;
+                            window.location = "https://mail.google.com/mail/?view=cm&fs=1&to=janardhanbonu@gmail.com&su=subject_here&body="+answers;
+                         // alert(answers);
                     });
                 });
                 
