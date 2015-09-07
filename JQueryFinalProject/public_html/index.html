@@ -1,10 +1,10 @@
 <html>
 	<head>
-	<script src="js/libs/jQueryVersions/jquery-1.11.3.js"></script>
+            <script src="js/jQueryVersions/jquery-1.11.3.js"></script>
 	<script type="text/javascript">
 	// Your code here. Please do not introduce any global variables
 	// Do not use an DOM properties or functions (e.g., innerHTML, getElementById)
-        exam = [
+        var exam = [
             "<p># I have modified the constructor function Foo of demoNew.html to take two parameters and use those parameters to initialize this.a and this.b</p>\n\n<p>The _new function no longer works because it assume that the constructor function has no parameters. Modify _new so it can pass parameters to the constructor function.</p>\n",
             "<p># What happens if you comment out line 10 (this.length=0) of jquery-0.1.js?</p>\n",
             "<p># Put a breakpoint at line 46 of jquery-0.4.js.</p>\n<ol type='a'>\n<li>What is the value of 'this' here?</li>\n<li>Why does it have that value?</li>\n</ol>\n",
@@ -15,8 +15,63 @@
             "<p># Put a breakpoint at line 27 jquery-0.3.js. What does this line do?</p>\n",
             "<p># This code crashes in demoClick.html</p>\n<pre>\nvar obj = $('.clickable');\nobj.click(foo).click(foo);\nPlease fix the problem.\n</pre>\n"
             ];
-         document.write(exam);
-	</script>
+            $.each(exam,function(index, value){
+                $(value).append("<div> hi there </div>");
+            }); 
+            $(document).ready(function() {
+                $.each(exam,function(index, value){
+                    // document.write();
+                    var temp = $("<div>");
+                    temp.addClass("question");
+                    temp.attr("id",index);
+                    temp.html(value);
+                    $('body').append(temp);
+                    var answer = $("<textarea>");
+                    answer.addClass("anwer");
+                    answer.attr("rows","8");
+                    answer.attr("cols","80");
+                    $('body').append(answer);
+//                    document.write(temp.text());
+//                    document.write(answer.);
+                });
+            });
+            
+         // document.write(exam);
+//         $.each(exam,function(index, value){
+////             document.write(index+"---->"+value);
+////             document.write("---------------");  
+//               var $d = $("<div>Sample</div>");
+//               $d.appendTo("body")
+//
+//         });
+//        $(document).ready(function() {
+//            var text1 = "";
+//            $.each(exam,function(index, value) {
+////             document.write(index+"---->"+value);
+////             document.write("---------------"); 
+////             document.write(index);
+//             var divquestion = "div.question";
+//             var divanswer = "div.answer";
+//             
+//             jQuery(divquestion).prepend(value);
+////             jQuery(divanswer).append("<textarea rows='5' cols='60'>");
+////             jQuery(divanswer).append("</textarea>");
+////             jQuery(divquestion).appendTo(text1);
+//             jQuery(divanswer).appendTo(text1);
+//             
+////               var  d1 = $("div");
+////               d1.addClass("question");
+////               d1.attr("id","question"+index);
+////               d1.text("question"+index);
+////               d1.appendTo(text1);
+////               $(d1).appendTo(text1);
+//           }); 
+//           $(text1).appendTo("body");
+//        });
+// http://www.mkyong.com/jquery/how-to-add-remove-textbox-dynamically-with-jquery/
+
+
+         </script>
 	</head>
 	<body>
 	<div id="test"></div>  <!-- This is all that the body element should contain! -->
