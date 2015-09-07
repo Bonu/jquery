@@ -18,21 +18,32 @@
             $.each(exam,function(index, value){
                 $(value).append("<div> hi there </div>");
             }); 
+            
             $(document).ready(function() {
                 $.each(exam,function(index, value){
                     // document.write();
                     var temp = $("<div>");
                     temp.addClass("question");
                     temp.attr("id",index);
+                    $(value).prepend("Question "+index);
                     temp.html(value);
+                    
                     $('body').append(temp);
                     var answer = $("<textarea>");
+                    answer.attr("id","answer"+index);
                     answer.addClass("anwer");
                     answer.attr("rows","8");
                     answer.attr("cols","80");
                     $('body').append(answer);
 //                    document.write(temp.text());
 //                    document.write(answer.);
+
+                    $(function() {
+                        var editor = document.querySelector("#answer"+index);
+                        editor.addEventListener("keyup", function() {
+                         window.localStorage["answer"+index] = editor.value;
+                        });
+                    });
                 });
             });
             
