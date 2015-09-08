@@ -73,6 +73,7 @@
                             var answer = "[[["+window.localStorage["answer"+index]+"]]]";
                             answers.push(answer+'\r\n');
                             answers.push('<br>');
+                            answers.push('\n\n');
                          });
                         // document.write(answers.toString());  
                         window.location = "https://mail.google.com/mail/?format=html&view=cm&fs=1&to=janardhanbonu@gmail.com&su=jQuery Final exam submission&body="+answers.toString();
