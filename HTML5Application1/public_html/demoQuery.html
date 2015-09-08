@@ -1,0 +1,20 @@
+
+<html>
+	<head>
+		<title>Demo jQuery</title>
+                 <script type="text/javascript" src="js/libs/jQueryVersions/jquery-0.1.js"  />	
+            
+	</head>
+	<body>
+	<div class="update"></div>
+	<div class="update"></div>
+	</body>
+       
+<script type="text/javascript">
+                var els, i;
+                els = $(".update");
+                for (i=0; i<els.length; i++) {
+                        els[i].innerHTML = "hello";	// DOM
+                }
+	</script>
+</html>
