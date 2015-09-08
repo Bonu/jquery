@@ -1,0 +1,165 @@
+<html>
+	<head>
+		<title>CS490 jQuery Lecture 8</title>
+		<style type='text/css'>
+			p, i {width:600px}
+ 			div {display:none;}
+			li {margin-bottom:20px; width:600px}
+			#slide1 {display:block}
+			.red {color:red}
+			.blue {color:blue}
+			.big {overflow:scroll}
+			.log {margin:0}
+			table {border-collapse:collapse}
+		</style>
+		<script src='slideshow.js'></script>
+	</head>
+	<body>
+  <div>
+  <h3>Review</h3>
+  <ol>
+  <li>
+  <p>Which is better?</p>
+  <pre>
+jQuery.fn.f1 = function(){};  
+jQuery.fn.f2 = function(){};  
+jQuery.fn.f3 = function(){};  
+jQuery.fn.f4 = function(){};  
+or
+jQuery.fn.extend(
+   f1: function(),
+   f2: function(),
+   f3: function(),
+   f4: function()
+}
+  </pre></li>
+  <li>jQuery.each can iterate through both plain objects and arrays.
+<pre>
+each: function( obj, fn, args ) {
+   if ( obj.length == undefined ) {
+      <b>for ( var i in obj ) {</b>
+         fn.apply( obj[i], args || [i, obj[i]] );
+      }
+   } else {
+      <b>for ( var i = 0; i &lt; obj.length; i++ ) {</b>
+         fn.apply( obj[i], args || [i, obj[i]] );
+      }
+   }
+   return obj;
+}
+</pre>
+  </li>
+  </ol>
+  </div>
+  
+  <div>
+  <h3>Abereham's experiment</h3>
+  <p>A nested function does not inherit the context of its parent</p>
+  	<a target='_blank' href='demoAbereham.html'>demoAbereham.html</a><br/><br/>
+  </div>
+  
+  <div>
+  <h3>Sugar-coated calls to attr</h3>
+  <a target='_blank' href='demoSugarCoatedAttr.html'>demoSugarCoatedAttr.html</a><br/>
+  <pre>
+<span class='red'>jQuery.macros.attr</span> = {
+   val: "value",
+   html: "innerHTML",
+   id: null,
+   title: null,
+   name: null,
+   href: null,
+   src: null,
+   rel: null
+}
+  </pre>
+  	<table border='1px'>
+  	<tr>
+  	<td valign='top'>
+<pre>
+jQuery.each( <span class='red'>jQuery.macros.attr</span>, function(jqName,domName){
+   domName = domName || jqName;
+   jQuery.fn[ jqName ] = function(value) {
+      return value == undefined ?
+         this.length ? this[0][domName] : null :
+         this.attr( domName, value );
+    };
+});
+
+</pre>
+  	</td>
+  	<td valign='top'>
+<pre>
+jQuery.each( <span class='red'>jQuery.macros.attr</span>, function(i,n){
+   n = n || i;
+   jQuery.fn[ i ] = function(h) {
+      return h == undefined ?
+         this.length ? this[0][n] : null :
+         this.attr( n, h );
+    };
+});
+</pre>
+  	</td>
+  	</tr>
+  	</table>
+  </div>
+
+<div>
+  <h3>Sugar-coated calls to css</h3>
+  <a target='_blank' href='demoSugarCoatedCSS.html'>demoSugarCoatedCSS.html</a><br/>
+  <pre>
+<span class='red'>jQuery.macros.css</span> = "width,height,top,left,position,float,overflow,color,background".split(",");
+  </pre>
+  	<table border='1px'>
+  	<tr>
+  	<td valign='top'>
+<pre>
+jQuery.each( <span class='red'>jQuery.macros.css</span>, function(i,cssName){
+   jQuery.fn[ cssName ] = function(value) {
+      return value == undefined ?
+         ( this.length ? this.css(cssName ) : null ) :
+           this.css( cssName, value );
+      };
+});		
+
+</pre>
+  	</td>
+  	<td valign='top'>
+<pre>
+jQuery.each( <span class='red'>jQuery.macros.css</span>, function(i,n){
+   jQuery.fn[ n ] = function(h) {
+      return h == undefined ?
+         ( this.length ? jQuery.css( this[0], n ) : null ) :
+           this.css( n, h );
+   };
+});
+</pre>
+  	</td>
+  	</tr>
+  	</table>
+  </div>
+
+  <div>
+  <h3>To Do</h3>
+  <ol>
+  <li><p>Consider the following:<br/>
+  $("p").each(foo, ["+++", "---"])</p>
+  <p>Write the function foo that will bracket the text of each p with +++ and ---. For example</p>
+  <pre>
+  &lt;p&gt;hello<&lt;p&gt; will be changed to
+  &lt;p&gt;+++hello---<&lt;p&gt;>
+  </pre>
+  
+  <li>Use debugger to step through jQuery.init until it is understood.</li>
+  <li><p>Add the prototype function visibility to jquery-0.8.js.<br/>
+  $("#id").visibility("hidden") does the same thing as $("#id)".css("visibility", "hidden");</p>
+  <p>This can be done without modifying jQuery.init.</p>
+  </li>
+  <li><p>Try adding the prototype function textColor that is equivalent to css("color", ...), e.g.<br/>
+  $("#id").textColor("blue") should do same thing as $("#id").css("color", "blue");</p>
+  <p>I claim that jQuery.init must be modified in order to do this. Why?</p>
+  </li>
+  </ol>
+  </div>
+    </body>
+</html>
