@@ -1,11 +1,11 @@
-<html>
-	<head>
-            <script type="text/javascript" src="js/jQueryVersions/jquery-1.11.3.js"></script>
-            <script type="text/javascript" src="js/custom/exam.js"></script>
-            <link rel="stylesheet" type="text/css" href="css/exam.css">
-            
-            <script type="text/javascript">
-	// Your code here. Please do not introduce any global variables
+/* 
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+
+// Your code here. Please do not introduce any global variables
 	// Do not use an DOM properties or functions (e.g., innerHTML, getElementById)
             
             jQuery(document).ready(function() {
@@ -63,33 +63,23 @@
                     var r= $('<input id="sendmailbtn" type="button" value="Submit>>"/>');
                     jQuery('#test').append(r);
                 });
-                jQuery('#test').append("<br><br><br><hr>");
+                jQuery('#test').append("<br><br><br>");
                 
                 jQuery(function(){
                     jQuery("#sendmailbtn").click(function() {
 //                      alert( "Handler for .click() called." );
-                        var answers =  jQuery("<div>"); 
+                        var answers =  []; 
                         jQuery.each(exam,function(index, value){
                             index = index + 1;
-                         // alert(window.localStorage["answer"+index]);
-                            var answer = "";
-                            
-                            answer = "[[["+window.localStorage["answer"+index]+"]]]";
-                           
-                            $(answers).text(answer);
-//                           
+                            var answer = "[[["+window.localStorage["answer"+index]+"]]]";
+                            answers.push(answer+'\r\n');
+                            answers.push('<br>');
                          });
-                           
-                            window.location = "https://mail.google.com/mail/?view=cm&fs=1&to=janardhanbonu@gmail.com&su=jQuery Final exam submission&body="+temp.text;
-                       // alert(answers.text);
+                        // document.write(answers.toString());  
+                        window.location = "https://mail.google.com/mail/?format=html&view=cm&fs=1&to=janardhanbonu@gmail.com&su=jQuery Final exam submission&body="+answers.toString();
+                        // alert(answers.toString());
                     });
                 });
                 
             });
-            
-         </script>
-	</head>
-	<body>
-	<div id="test"></div>  <!-- This is all that the body element should contain! -->
-	</body>
-</html>
+            d
