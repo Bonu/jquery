@@ -1,15 +1,26 @@
 <html>
 	<head>
             <script type="text/javascript" src="js/jQueryVersions/jquery-1.11.3.js"></script>
-            <link rel="stylesheet" type="text/css" href="css/exam.css">
-            
+            <style>
+             
+                .instructions {
+                    font-family: "Times New Roman", Times, serif;
+                    color: red;
+                    font-style: italic;
+                }
+
+                h1 {
+                    color: maroon;
+                    margin-left: 40px;
+                } 
+            </style>
             
             <script type="text/javascript">
 	// Your code here. Please do not introduce any global variables
 	// Do not use an DOM properties or functions (e.g., innerHTML, getElementById)
             
             jQuery(document).ready(function() {
-                var instructionForSubmission = ["Please click on the preview button and then copy, paste the whole page in e-mail and send to rbunker@lisco.com. Please mention you name in the mail Subject"];
+                var instructionForSubmission = ["Please click on the preview button and then copy the whole page using and send mail to rbunker@lisco.com. Please mention you name in the mail Subject"];
                 var exam = [
                     "<p># I have modified the constructor function Foo of demoNew.html to take two parameters and use those parameters to initialize this.a and this.b</p>\n\n<p>The _new function no longer works because it assume that the constructor function has no parameters. Modify _new so it can pass parameters to the constructor function.</p>\n",
                     "<p># What happens if you comment out line 10 (this.length=0) of jquery-0.1.js?</p>\n",
@@ -71,7 +82,7 @@
                 });
                 jQuery('#test').append("<br><br><br>");
                 jQuery(function(){
-                    var r= $('<input id="sendmailbtn" type="button" value="Preview >>"/>');
+                    var r= $('<input id="sendmailbtn" type="button" value="Submit>>"/>');
                     jQuery('#test').append(r);
                 });
                 jQuery('#test').append("<br><br><br>");

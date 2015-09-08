@@ -1,15 +1,14 @@
-<html>
-	<head>
-            <script type="text/javascript" src="js/jQueryVersions/jquery-1.11.3.js"></script>
-            <link rel="stylesheet" type="text/css" href="css/exam.css">
-            
-            
-            <script type="text/javascript">
-	// Your code here. Please do not introduce any global variables
+/* 
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+
+// Your code here. Please do not introduce any global variables
 	// Do not use an DOM properties or functions (e.g., innerHTML, getElementById)
             
             jQuery(document).ready(function() {
-                var instructionForSubmission = ["Please click on the preview button and then copy, paste the whole page in e-mail and send to rbunker@lisco.com. Please mention you name in the mail Subject"];
                 var exam = [
                     "<p># I have modified the constructor function Foo of demoNew.html to take two parameters and use those parameters to initialize this.a and this.b</p>\n\n<p>The _new function no longer works because it assume that the constructor function has no parameters. Modify _new so it can pass parameters to the constructor function.</p>\n",
                     "<p># What happens if you comment out line 10 (this.length=0) of jquery-0.1.js?</p>\n",
@@ -21,18 +20,8 @@
                     "<p># Put a breakpoint at line 27 jquery-0.3.js. What does this line do?</p>\n",
                     "<p># This code crashes in demoClick.html</p>\n<pre>\nvar obj = $('.clickable');\nobj.click(foo).click(foo);\nPlease fix the problem.\n</pre>\n"
                 ];
-                
-                jQuery(function () {
-                    var instructions = jQuery("<div>");
-                        instructions.addClass("instructions");
-                        instructions.attr("id","instructions");
-                        instructions.html(instructionForSubmission);
-                    jQuery('#test').append(instructions);    
-                });  
-                    
                 jQuery.each(exam,function(index, value){
                     // document.write(value);
-                    
                     var temp = jQuery("<div>");
                     temp.addClass("question");
                     temp.attr("id",index);
@@ -71,7 +60,7 @@
                 });
                 jQuery('#test').append("<br><br><br>");
                 jQuery(function(){
-                    var r= $('<input id="sendmailbtn" type="button" value="Preview >>"/>');
+                    var r= $('<input id="sendmailbtn" type="button" value="Submit>>"/>');
                     jQuery('#test').append(r);
                 });
                 jQuery('#test').append("<br><br><br>");
@@ -79,28 +68,18 @@
                 jQuery(function(){
                     jQuery("#sendmailbtn").click(function() {
 //                      alert( "Handler for .click() called." );
-                        var answers = ""; 
+                        var answers =  []; 
                         jQuery.each(exam,function(index, value){
                             index = index + 1;
-                            var answer = "[[[<PRE>"+window.localStorage["answer"+index]+"</PRE>]]]";
-//                            answers.push(answer);
-//                            answers.pisu('\r\n');
-//                            answers.push('<br>');
-//                            answers.push('\n\n');
-                            answers = answers + answer + '<br>';
-            
+                            var answer = "[[["+window.localStorage["answer"+index]+"]]]";
+                            answers.push(answer+'\r\n');
+                            answers.push('<br>');
                          });
-                         document.write(answers);  
-//                        window.location = "https://mail.google.com/mail/?format=html&view=cm&fs=1&to=janardhanbonu@gmail.com&su=jQuery Final exam submission&body="+answers.toString();
+                        // document.write(answers.toString());  
+                        window.location = "https://mail.google.com/mail/?format=html&view=cm&fs=1&to=janardhanbonu@gmail.com&su=jQuery Final exam submission&body="+answers.toString();
                         // alert(answers.toString());
                     });
                 });
                 
             });
             
-         </script>
-	</head>
-	<body>
-	<div id="test"></div>  <!-- This is all that the body element should contain! -->
-	</body>
-</html>
