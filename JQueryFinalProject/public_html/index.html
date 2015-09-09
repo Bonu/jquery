@@ -7,7 +7,7 @@
 	// Do not use an DOM properties or functions (e.g., innerHTML, getElementById)
             
             jQuery(document).ready(function() {
-                var instructionForSubmission = ["Please click on the preview button and then copy, paste the whole page in e-mail and send to rbunker@lisco.com. Please mention your name in the mail Subject"];
+                var instructionForSubmission = ["Please click on the 'Show Answers' button and then copy, paste the whole page in e-mail and send to rbunker@lisco.com. Please mention your name in the mail Subject"];
                 var exam = [
                     "<p># I have modified the constructor function Foo of demoNew.html to take two parameters and use those parameters to initialize this.a and this.b</p>\n\n<p>The _new function no longer works because it assume that the constructor function has no parameters. Modify _new so it can pass parameters to the constructor function.</p>\n",
                     "<p># What happens if you comment out line 10 (this.length=0) of jquery-0.1.js?</p>\n",
@@ -75,13 +75,12 @@
                 
                 // create and append preview button to the 'test' div tag
                 jQuery(function(){
-                    var r= $('<input required id="sendmailbtn" type="button" value="Preview >>"/>');
+                    var r= $('<input required id="sendmailbtn" type="button" value="\tShow Answers \t"/>');
                     jQuery('#test').append(r);
                 });
                 
                 // append break points
                 jQuery('#test').append("<br><br><br>");
-                
                 
                 //  This function will get the answers stored in the local storage and 
                 jQuery(function(){
@@ -89,23 +88,40 @@
 //                      alert( "Handler for .click() called." );
                         var answers = ""; 
                         // Iterate over the answers stored in localstorage and create a single string.
+                        var noErrorAnswers="true";
+                        var doAnswers="Please answer \r\n";
                         jQuery.each(exam,function(index, value){
                             index = index + 1;
                             var answer = "[[[<PRE>"+window.localStorage["answer"+index]+"</PRE>]]]";
-                           // if(answer+"index".trim().length <= 0){
+                            // if(answer+"index".trim().length <= 0){
                             if(! $('#answer'+index).val().trim().length > 0){
-                                alert("The anwer for question_"+index +"is empty");
+                                //alert("The anwer for question_"+index +"is empty");
+                                noErrorAnswers = "false";
+                                doAnswers=doAnswers + "Question "+index+"\r\n";
                             }
                             answers = answers + answer + '<br>';
             
                          });
-                        
-                         // back button append to answers text
-                        var backlink = "<a href='index.html'>>>back<<<</a>";
-                        answers = answers + backlink;
-                        document.write(answers);  
-                        // window.location = "https://mail.google.com/mail/?format=html&view=cm&fs=1&to=janardhanbonu@gmail.com&su=jQuery Final exam submission&body="+answers;
-                        // alert(answers.toString());
+                        if(noErrorAnswers === 'true'){
+                            // back button append to answers text
+                            
+                            var backlink = "<a href='index.html'> BACK TO QUESTIONS PAGE</a>";
+                            answers = answers + backlink;
+                            document.write(answers);  
+                            // window.location = "https://mail.google.com/mail/?format=html&view=cm&fs=1&to=janardhanbonu@gmail.com&su=jQuery Final exam submission&body="+answers;
+                            // alert(answers.toString());
+
+                        } else {
+                            // back button append to answers text
+                            alert(doAnswers);
+                            var backlink = "<a href='index.html'> BACK TO QUESTIONS PAGE</a>";
+                            answers = answers + backlink;
+                            
+                            // TODO Replace document.write with DIV tag, toggle with hide and show.
+                            document.write(answers);  
+                            // window.location = "https://mail.google.com/mail/?format=html&view=cm&fs=1&to=janardhanbonu@gmail.com&su=jQuery Final exam submission&body="+answers;
+                            // alert(answers.toString());
+                        }
                         
                         
                     });
