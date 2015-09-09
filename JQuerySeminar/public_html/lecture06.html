@@ -39,4 +39,61 @@
   	<li>Return to page and refresh</li>
   	<li>Return to Developer Tools and observe network activity</li>
   </ol>
-  </
+  </div>
+  
+  <div>
+  <h3>Same-origin policy</h3>
+  <a target='_blank' href='https://en.wikipedia.org/wiki/Same-origin_policy'>Same-origin policy</a>
+  <p>URL used in Ajax must be from same domain as domain that served the page containing the Ajax call</p>
+  <p>Prevents a web page from using Ajax to access a web page on another domain which may have restricted
+  access on that domain.</p>
+  <p>demoAjax.html will not work if run on your local machine because the URL used specifies domain
+  puzzlecrowd.com.
+  </div>
+  <div>
+  <h3>Closure</h3>
+  <p>Variables marked in red are in the closure of the function</p>
+  <pre>
+      var onreadystatechange = function(istimeout){
+         // The transfer is complete and the data is available, or the request timed out
+         if ( <span class='red'>xml</span> && <span class='red'>xml</span>.readyState == 4 ) {
+            <span class='red'>requestDone</span> = true;
+
+            var status = jQuery.httpSuccess( <span class='red'>xml</span> ) ?
+               <span class='red'>ifModified</span> && jQuery.httpNotModified( <span class='red'>xml</span>, <span class='red'>url</span> ) ? "notmodified" : "success" : "error";
+            
+            // Make sure that the request was successful or notmodified
+            if ( status != "error" ) {
+               // Cache Last-Modified header, if ifModified mode.
+               var modRes = <span class='red'>xml</span>.getResponseHeader("Last-Modified");
+               if ( <span class='red'>ifModified</span> && modRes ) jQuery.lastModified[url] = modRes;
+               
+               // If a local callback was specified, fire it
+               if ( <span class='red'>success</span> ) <span class='red'>success</span>( <span class='red'>xml</span>, status );
+                           
+            // Otherwise, the request was not successful
+            } else {
+               // If a local callback was specified, fire it
+               if ( <span class='red'>error</span> ) <span class='red'>error</span>(</span>xml</span>, status );               
+            }
+               
+            // Process result
+            if ( <span class='red'>ret</span> ) <span class='red'>ret</span>(<span class='red'>xml</span>, status);
+            
+            // Stop memory leaks
+            <span class='red'>xml</span>.onreadystatechange = function(){};
+            <span class='red'>xml</span> = null;            
+         }
+      };
+  </pre>
+  </div>
+  
+  <div>
+  <h3>To Do</h3>
+  <ol>
+  <li>Step through code until you understand it.</li>
+  <li>See how much more complex $.ajax is in <a target='_blank' href='http://api.jquery.com/jquery.ajax/'>jquery-1.11.3</a>
+  </ol>
+  </div>
+    </body>
+</html>

@@ -1,0 +1,43 @@
+<html>
+<head>
+<script type='text/javascript'>
+  function Foo(p1, p2) {
+    this.a = p1;
+    this.b = p2;
+    // return {c:"abc"}
+  }
+
+// These should be declared outside of Foo. Otherwise there will be a copy for each object created.
+  Foo.log = function(value) {console.log(value)};  // "static" method
+
+  Foo.prototype = {	// line 62
+     toString: function() {Foo.log("a=" + this.a + ", b=" + this.b)}  // instance method
+  }
+  
+  function demo() {
+    var obj;  	
+  	
+    obj1 = new Foo(5, "hello");
+    obj1.toString();
+
+
+// Memorize the code in red and be able to answer questions about it
+// The following is equivalent to obj3 = new Foo();  	
+    function _new(constructor, args) {
+      var obj = Object.create(constructor.prototype);  // set obj.__proto__ to constructor.prototype
+      var temp = constructor.apply(obj, args);               // obj will be context available to constructor
+      if (temp) {  // if constructor returns something use that (non-standard behavior)
+        obj = temp;
+      }
+      return obj;
+    }
+  	 
+    var obj3 = _new(Foo, [5, "hello"]); 
+  	  	
+    debugger;
+  }
+</script>
+</head>
+<body onload="demo()">
+</body>
+</html>

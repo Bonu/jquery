@@ -1,0 +1,32 @@
+<html>
+	<head>
+		<title>Demo extend</title>
+	</head>
+	<body>
+	<div id="container"></div>
+	</body>
+	<script type="text/javascript">
+	extend = function(obj, prop) {
+		var i;
+
+		if (prop === undefined) { 
+			prop = obj; 
+			obj = this; 
+		}
+	
+		for (i in prop ) {
+			obj[i] = prop[i];
+		}
+			
+		return obj;
+	}
+	
+	obj = {a:5};
+	
+	extend(obj, {b:5});
+	console.log(obj.b);
+	
+	extend.apply(obj, [{c:10}]);  // prop will be undefined
+	console.log(obj.c);
+	</script>
+</html>

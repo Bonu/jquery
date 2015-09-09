@@ -1,0 +1,37 @@
+<html>
+<head>
+<script type='text/javascript'>
+	var obj;
+	function Foo(a) {
+		this.length = 0;
+		[].push.apply(this, a);
+	}
+	
+	Foo.extend = function(obj, prop) {
+		var i;
+
+		if (prop === undefined) { 
+			prop = obj; 
+			obj = this; 
+		}
+	
+		for (i in prop ) {
+			obj[i] = prop[i];
+		}
+			
+		return obj;
+	}
+	
+	Foo.prototype.extend = Foo.extend;
+
+	Foo.extend({first:function(obj) {console.log(obj[0])}});	
+	Foo.prototype.extend({first:function() {Foo.first(this)}});	
+	obj = new Foo([1, 2, 3, 4]);
+	obj.first();
+	
+</script>
+<body>
+<p>Check console</p>
+</body>
+</html>
+

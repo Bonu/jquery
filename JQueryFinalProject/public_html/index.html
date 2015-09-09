@@ -2,14 +2,12 @@
 	<head>
             <script type="text/javascript" src="js/jQueryVersions/jquery-1.11.3.js"></script>
             <link rel="stylesheet" type="text/css" href="css/exam.css">
-            
-            
             <script type="text/javascript">
 	// Your code here. Please do not introduce any global variables
 	// Do not use an DOM properties or functions (e.g., innerHTML, getElementById)
             
             jQuery(document).ready(function() {
-                var instructionForSubmission = ["Please click on the preview button and then copy, paste the whole page in e-mail and send to rbunker@lisco.com. Please mention you name in the mail Subject"];
+                var instructionForSubmission = ["Please click on the preview button and then copy, paste the whole page in e-mail and send to rbunker@lisco.com. Please mention your name in the mail Subject"];
                 var exam = [
                     "<p># I have modified the constructor function Foo of demoNew.html to take two parameters and use those parameters to initialize this.a and this.b</p>\n\n<p>The _new function no longer works because it assume that the constructor function has no parameters. Modify _new so it can pass parameters to the constructor function.</p>\n",
                     "<p># What happens if you comment out line 10 (this.length=0) of jquery-0.1.js?</p>\n",
@@ -46,9 +44,9 @@
                     
                     var answer = $("<textarea>");
                     answer.attr("id","answer"+index);
-                    answer.addClass("anwer");
-                    answer.attr("rows","8");
-                    answer.attr("cols","80");
+                    answer.addClass("answer");
+                    answer.attr("rows","10");
+                    answer.attr("cols","120");
                     
                     jQuery('#test').append(answer);
 //                    document.write(temp.text());
@@ -70,10 +68,12 @@
                     
                 });
                 jQuery('#test').append("<br><br><br>");
+                
                 jQuery(function(){
                     var r= $('<input id="sendmailbtn" type="button" value="Preview >>"/>');
                     jQuery('#test').append(r);
                 });
+                
                 jQuery('#test').append("<br><br><br>");
                 
                 jQuery(function(){
@@ -90,8 +90,8 @@
                             answers = answers + answer + '<br>';
             
                          });
-                         document.write(answers);  
-//                        window.location = "https://mail.google.com/mail/?format=html&view=cm&fs=1&to=janardhanbonu@gmail.com&su=jQuery Final exam submission&body="+answers.toString();
+                        document.write(answers);  
+                        // window.location = "https://mail.google.com/mail/?format=html&view=cm&fs=1&to=janardhanbonu@gmail.com&su=jQuery Final exam submission&body="+answers;
                         // alert(answers.toString());
                     });
                 });

@@ -1,0 +1,33 @@
+<html>
+<head>
+<script type='text/javascript'>
+function init() {
+	var a, obj, i, prop;
+	
+	a = ["up", "down", "left", "right"];
+	obj = {0:"up", 1:"down", 2:"left", 3:"right"};  // Show in watch window
+	for (prop in obj) {
+		console.log(obj[prop]);
+	}
+	for (i=0; i<4; i++) {    // no length so need to hard-code 4
+		console.log(obj[i]);   
+	}
+	obj={};
+	obj.length = 0;
+	new Array().push.apply(obj, a);	// Show in watch window
+	// [].push(apply(obj, a);  // uses array literal instead
+	for (i=0; i<obj.length; i++) {
+		console.log(obj[i]);
+	}
+	
+	obj.splice = [].splice;	// Show in watch window (notice Object[4])
+	obj.splice(1, 2);       // remove "down", "left"
+	for (i=0; i<obj.length; i++) {
+		console.log(obj[i]);
+	}	
+}
+</script>
+</head>
+<body onload="init()">
+</body>
+</html>

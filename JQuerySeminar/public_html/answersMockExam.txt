@@ -1,0 +1,108 @@
+1.
+I have modified the constructor function Foo of demoNew.html to take two parameters and use
+those parameters to initialize this.a and this.b
+
+The _new function no longer works because it assume that the constructor function has
+no parameters. Modify _new so it can pass parameters to the constructor function.
+[
+    function _new(constructor, args) {
+      var obj = Object.create(constructor.prototype);  // set obj.__proto__ to constructor.prototype
+      var temp = constructor.apply(obj, args);               // obj will be context available to constructor
+      if (temp) {  // if constructor returns something use that (non-standard behavior)
+        obj = temp;
+      }
+      return obj;
+    }
+
+    var obj3 = _new(Foo, [5, "hello"])
+]
+
+
+2.
+What happens if you comment out line 10 (this.length=0) of jquery-0.1.js?
+[
+In Chrome it appears not to have any affect. I do not know what will happen in other browsers.
+]
+
+3. 
+Put a breakpoint at line 46 of jquery-0.4.js. 
+a. What is the value of "this" here?
+b. Why does it have that value?
+[
+It is a div.clickable DOM object. This was set by the browser when it
+responded to the mouse click and called the handle function.
+]
+
+4.
+Add a mouseup prototype function to jquery-0.4.js. List the changes you had to make below.
+[
+Added the following function to jQuery.prototype
+   mouseup: function(f) {
+      return this.bind("mouseup", f);
+   }
+]
+
+5.
+The ability of JavaScript to add new properties to system objects (e.g. adding an events property to a 
+DOM element as was done in jquery-0.4.js) has inspired me to make this exam dynamically updateable. 
+Please add a question in the area below and provide its answer.
+[
+Q. Why should you never directly modify the __proto__ property of an object?
+A. Because it is undocumented and hence might not exist in all browsers or its name might
+be changed by the browser manufacturer.
+]
+
+6. Put a breakpoint at line 56 of jquery-0.5.js. Add some code to demoAttr.html that will cause that 
+breakpoint to be hit.
+[
+console.log(el.css("background-color"));
+]
+
+7. Add an html method to jQuery.prototype in jquery-0.1.js. It is called as follows:
+el = $(".someclass");
+el.html("<b>hello</b>");	// will set the innerHTML of each DOM element selected to "<b>hello</b>"
+[
+html: function(value) {
+	var i;
+	for (i=0; i<this.length; i++) {
+		this.innerHTML = value;
+	}
+}
+]
+
+8. 
+Put a breakpoint at line 27 jquery-0.3.js. What does this line do?
+[
+It calls each function added to the readyList setting its context to the document DOM object.
+]
+
+9.
+This code crashes in demoClick.html
+   var obj = $(".clickable");
+   obj.click(foo).click(foo);
+Please fix the problem.
+[
+The bind function should return this.
+]
+
+10.
+var obj = {a:5, b:"hello", c:10}
+obj.sum = function() {
+	var prop;
+	sum = 0;
+	for (prop in this) {
+		if (typeof this[prop] === "number") {
+			sum += this[prop];
+		}
+	}
+	return sum;
+}
+console.log(obj.sum());
+
+var obj2 = {c:10, d:"goodbye", "d": -8}
+
+Use apply to pass obj2 to obj.sum. It should return 2.
+
+[
+obj.sum.apply(obj2);
+]

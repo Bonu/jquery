@@ -1,0 +1,37 @@
+<html>
+<head>
+<style>
+/*div.target>p.silhuoette {color:red}*/
+</style>
+<script src="jQueryVersions/jquery-1.0x.js"></script>
+<script type='text/javascript'>
+function demo() {
+	var result;
+
+	jQuery.extend(lowLevel);
+	result = [];
+	/*
+	lowLevel(" ", "div", result);
+	lowLevel(">", "p", result);
+	lowLevel("#", "silhouette", result);	
+	*/ 
+	$("div.target>p.silhuoette").css("color", "red");
+}
+
+function lowLevel(p1, p2, result) {
+	var r, i, length;
+	if (p1 === " ") {	// searching for tag
+		r = document.querySelectorAll(p2);
+	} else if (p1 === ">") {
+		
+	}
+}
+</script>
+</head>
+<body onload="demo()">
+<div id="div1" class='target'><p class='silhouette'>div1</p></div>
+<div id="div2" class='target'><p class='silhouette'>div2</p></div></div>
+<div id="div3" class='target'><p>div3</p></div>
+<div id="div4" class='target'>div4</div>
+<div id="div5">div5</div>
+</body>

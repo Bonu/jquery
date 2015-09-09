@@ -1,0 +1,21 @@
+<html>
+<head>
+<script type='text/javascript'>
+function foo(obj) {
+	returned = JSON.parse(obj);
+}
+function demo() {
+	var script;
+    script = document.createElement("script");
+    script.async = true; 
+    script.src = "http://puzzlecrowd.com/jquery/jsonp.txt";
+    script.onload = function() {  // function called after script is executed
+    	console.log("a=" + returned.a + ", b=" + returned.b);
+    }
+    document.body.appendChild(script);	// script fetched and executed
+}
+</script>
+</head>
+<body onload="demo()">
+<div id="test"></p>
+</body>

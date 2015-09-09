@@ -1,0 +1,40 @@
+<html>
+<head>
+<script type='text/javascript'>
+	function foo(n1, n2) {
+		alert(this.test);
+	}
+
+	function useObject() {
+		obj = {test:"Using object"};
+		obj.foo = foo;
+		obj.foo(1, 2);
+	}
+	
+	function useApply() {
+		foo.apply({test:"Using apply"}, [1, 2]);
+	}
+
+	function useCall() {
+		foo.call({test:"Using call"}, [1, 2]);
+	}
+
+	function useBind() {
+		var foobind = foo.bind({test:"Using bind"}, 1, 2);
+		foobind();
+	}
+	
+	function useGlobal() {
+		window.test = "Using global";
+		foo(1, 2);
+	}
+</script>
+</head>
+<body onload="init()">
+	<button onclick="useObject()">Use object</button><br/>
+	<button onclick="useApply()">Use apply</button></br>
+	<button onclick="useCall()">Use call</button></br>
+	<button onclick="useBind()">Use bind</button></br>
+	<button onclick="useGlobal()">Use global object</button>
+</body>
+</html>

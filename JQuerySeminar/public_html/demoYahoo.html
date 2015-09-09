@@ -1,0 +1,32 @@
+<html>
+<head>
+<script src="jQueryVersions/jquery-1.11.3.js"></script>
+<script type='text/javascript'>
+function demo() {
+// Using YQL and JSONP
+$.ajax({
+    url: "http://query.yahooapis.com/v1/public/yql",
+ 
+    // The name of the callback parameter, as specified by the YQL service
+    jsonp: "callback",
+ 
+    // Tell jQuery we're expecting JSONP
+    dataType: "jsonp",
+ 
+    // Tell YQL what we want and that we want JSON
+    data: {
+        q: "SELECT * from geo.places WHERE text='SFO'",
+        format: "json"
+    },
+ 
+    // Work with the response
+    success: function( response ) {
+        console.log( response ); // server response
+    }
+});}
+
+</script>
+</head>
+<body onload="demo()">
+<div id="test"></p>
+</body>

@@ -1,0 +1,53 @@
+<html>
+<head>
+<script type='text/javascript'>
+  debugger;
+  function Foo() {
+    this.a = 5;
+    this.b = "hello";
+    Foo.prototype.test = function(){console.log("test")}
+	// return {c:"abc"}
+  }
+
+// These should be declared outside of Foo. Otherwise there will be a copy for each object created.
+  Foo.log = function(value) {console.log(value)};
+
+  Foo.prototype = {	// line 62
+     toString: function() {debugger; Foo.log("a=" + this.a + ", b=" + this.b)}
+  }
+  
+  function demo() {
+	var obj1, obj2, p1, p2;  	
+  	
+  	obj1 = new Foo();
+  	var originalTest = obj1.__proto__.test;
+  	var originalToString = obj1.__proto__.toString;
+  	console.log(obj1.__proto__ == Foo.prototype);	// true
+  	obj1.toString();  // uses "this"
+  	obj1.toString = function(){console.log(this.b + "(" + this.a + ")")};
+  	obj1.toString();  // will not be in obj2 below.
+  	
+  	obj2 = new Foo();
+  	// The following was inspired by Md. Joynul
+  	console.log(originalTest === obj2.__proto__.test);	// false
+  	console.log(originalToString === obj2.__proto__.toString);  	// true
+  	
+  	// The following was inspired by Amul
+  	console.log(Object === obj1.constructor);  // true
+  	Object.x = "hello";
+  	// Watch Object and you will see x:"hello"
+  	// Watch obj.__proto__.constructor and you will see x:"hello"
+  	
+  	// The following was inspired by Amrit
+  	console.log(obj1.__proto__ === obj2.__proto__);
+  	Foo.prototype.toString = function() {console.log("Amrit")};
+  	obj2.toString() // will print Amrit
+  	Foo.prototype = {toString: function() {console.log("Not Amrit")}};
+  	obj2.toString();   // still prints Amrit
+  	console.log(obj1.__proto__ === Foo.prototype);  // false
+}
+
+</script>
+</head>
+<body onload="demo()">
+</body>
