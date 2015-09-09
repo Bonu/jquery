@@ -92,6 +92,10 @@
                         jQuery.each(exam,function(index, value){
                             index = index + 1;
                             var answer = "[[[<PRE>"+window.localStorage["answer"+index]+"</PRE>]]]";
+                           // if(answer+"index".trim().length <= 0){
+                            if(! $('#answer'+index).val().trim().length > 0){
+                                alert("The anwer for question_"+index +"is empty");
+                            }
                             answers = answers + answer + '<br>';
             
                          });
