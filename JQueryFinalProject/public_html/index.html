@@ -20,6 +20,7 @@
                     "<p># This code crashes in demoClick.html</p>\n<pre>\nvar obj = $('.clickable');\nobj.click(foo).click(foo);\nPlease fix the problem.\n</pre>\n"
                 ];
                 
+                // create instructions div tag dynamically and append to 'test' div tag
                 jQuery(function () {
                     var instructions = jQuery("<div>");
                         instructions.addClass("instructions");
@@ -31,6 +32,7 @@
                 jQuery.each(exam,function(index, value){
                     // document.write(value);
                     
+                    // create question div tag dynamically and append to 'test' div tag
                     var temp = jQuery("<div>");
                     temp.addClass("question");
                     temp.attr("id",index);
@@ -41,17 +43,18 @@
                     temp.html(value);
                     jQuery('#test').append(temp);
                     
-                    
+                    // create answer textarea dynamically and append to 'test' div tag
                     var answer = $("<textarea>");
                     answer.attr("id","answer"+index);
                     answer.addClass("answer");
                     answer.attr("rows","10");
                     answer.attr("cols","120");
-                    
                     jQuery('#test').append(answer);
+                    
 //                    document.write(temp.text());
 //                    document.write(answer.);
 
+                    // Check if there is data already present in localstorage, if yes update the answers textarea
                     jQuery(function () {
                         var editor = document.querySelector("#answer"+index);
                         if (window.localStorage["answer"+index]) {
@@ -59,6 +62,7 @@
                         }
                     });
                     
+                    // Persisit answers in localstorage entered by user 
                     jQuery(function() {
                         var editor = document.querySelector("#answer"+index);
                         editor.addEventListener("keyup", function() {
@@ -69,30 +73,37 @@
                 });
                 jQuery('#test').append("<br><br><br>");
                 
+                // create and append preview button to the 'test' div tag
                 jQuery(function(){
-                    var r= $('<input id="sendmailbtn" type="button" value="Preview >>"/>');
+                    var r= $('<input required id="sendmailbtn" type="button" value="Preview >>"/>');
                     jQuery('#test').append(r);
                 });
                 
+                // append break points
                 jQuery('#test').append("<br><br><br>");
                 
+                
+                //  This function will get the answers stored in the local storage and 
                 jQuery(function(){
                     jQuery("#sendmailbtn").click(function() {
 //                      alert( "Handler for .click() called." );
                         var answers = ""; 
+                        // Iterate over the answers stored in localstorage and create a single string.
                         jQuery.each(exam,function(index, value){
                             index = index + 1;
                             var answer = "[[[<PRE>"+window.localStorage["answer"+index]+"</PRE>]]]";
-//                            answers.push(answer);
-//                            answers.pisu('\r\n');
-//                            answers.push('<br>');
-//                            answers.push('\n\n');
                             answers = answers + answer + '<br>';
             
                          });
+                        
+                         // back button append to answers text
+                        var backlink = "<a href='index.html'>>>back<<<</a>";
+                        answers = answers + backlink;
                         document.write(answers);  
                         // window.location = "https://mail.google.com/mail/?format=html&view=cm&fs=1&to=janardhanbonu@gmail.com&su=jQuery Final exam submission&body="+answers;
                         // alert(answers.toString());
+                        
+                        
                     });
                 });
                 
@@ -102,5 +113,6 @@
 	</head>
 	<body>
 	<div id="test"></div>  <!-- This is all that the body element should contain! -->
+        <div id="preview"></div>
 	</body>
 </html>
