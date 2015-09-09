@@ -1,0 +1,228 @@
+<html>
+	<head>
+            <script type="text/javascript" src="js/jQueryVersions/jquery-1.11.3.js"></script>
+            <link rel="stylesheet" type="text/css" href="css/exam.css">
+            <style type="text/css">
+	#floating-box{
+		width:90px;
+		height:200px;
+		border:1px solid red;
+		background-color:#BBBBBB;
+		float:left;
+		margin-left:-100px;
+		margin-right:10px;
+		position:absolute;
+		z-index:1;
+	}
+	#page{
+		width:800px;
+    	margin:0 auto;
+	}
+	#header{
+		border:1px solid blue;
+		height:100px;
+		margin:8px;
+	}
+	#body{
+		border:1px solid blue;
+		height:2400px;
+		margin:8px;
+	}
+	#footer{
+		border:1px solid blue;
+		height:100px;
+		margin:8px;
+	}
+	h1,h2{
+		padding:16px;
+	}
+</style>
+            <script type="text/javascript">
+               
+	// Your code here. Please do not introduce any global variables
+	// Do not use an DOM properties or functions (e.g., innerHTML, getElementById)
+              $j=jQuery.noConflict();
+            jQuery(document).ready(function() {
+//                var instructionForSubmission = ["Please click on the 'Show Answers' button and then copy, paste the whole page in e-mail and send to rbunker@lisco.com. Please mention your name in the mail Subject"];
+//                var exam = [
+//                    "<p># I have modified the constructor function Foo of demoNew.html to take two parameters and use those parameters to initialize this.a and this.b</p>\n\n<p>The _new function no longer works because it assume that the constructor function has no parameters. Modify _new so it can pass parameters to the constructor function.</p>\n",
+//                    "<p># What happens if you comment out line 10 (this.length=0) of jquery-0.1.js?</p>\n",
+//                    "<p># Put a breakpoint at line 46 of jquery-0.4.js.</p>\n<ol type='a'>\n<li>What is the value of 'this' here?</li>\n<li>Why does it have that value?</li>\n</ol>\n",
+//                    "<p># Add a mouseup prototype function to jquery0.4.js. List the changes you had to make below.</p>\n",
+//                    "<p># The ability of JavaScript to add new properties to system objects (e.g. adding an events property to a\nDOM element as was done in jquery-0.4.js) has inspired me to make this exam dynamically updateable. </p>\n\n<p>Please add a question in the area below and provide its answer.</p>\n",
+//                    "<p># Put a breakpoint at line 56 of jquery-0.5.js. Add some code to demoAttr.html that will cause that\nbreakpoint to be hit.</p>\n",
+//                    "<p># Add an html method to jQuery.prototype in jquery-0.1.js. It is called as follows:</p>\n<pre>\nel = $('.someclass');\nel.html('<b>hello</b>');	// will set the innerHTML of each DOM element selected to '<b>hello</b>'\n</pre>\n",
+//                    "<p># Put a breakpoint at line 27 jquery-0.3.js. What does this line do?</p>\n",
+//                    "<p># This code crashes in demoClick.html</p>\n<pre>\nvar obj = $('.clickable');\nobj.click(foo).click(foo);\nPlease fix the problem.\n</pre>\n"
+//                ];
+                
+//                jQuery(function(){
+//                    var floatingbox= jQuery("<div id='floatingbox'>");
+//                    jQuery('#test').append(floatingbox); 
+//                });
+                
+                var $floatingbox = $('#floating-box');
+	
+                if($('body').length > 0){
+	
+		var bodyY = parseInt($('body').offset().top) - 20;
+		var originalX = $floatingbox.css('margin-left');
+	
+		$(window).scroll(function () { 
+		  
+			var scrollY = $(window).scrollTop();
+			var isfixed = $floatingbox.css('position') == 'fixed';
+			
+			if($floatingbox.length > 0){
+			
+				$floatingbox.html("srollY : " + scrollY + ", bodyY : " + bodyY + ", isfixed : " + isfixed);
+	
+				if ( scrollY > bodyY && !isfixed ) {
+					$floatingbox.stop().css({
+						position: 'fixed',
+						left: '50%',
+						top: 20,
+						marginLeft: -500
+	
+					});
+				} else if ( scrollY < bodyY && isfixed ) {
+					$floatingbox.css({
+						position: 'relative',
+						left: 0,
+						top: 0,
+						marginLeft: originalX
+					});
+				}
+				
+			}
+	
+		});
+	}
+                
+                
+                // create instructions div tag dynamically and append to 'test' div tag
+//                jQuery(function () {
+//                    var instructions = jQuery("<div>");
+//                        instructions.addClass("instructions");
+//                        instructions.attr("id","instructions");
+//                        instructions.html(instructionForSubmission);
+//                    jQuery('#test').append(instructions);    
+//                });  
+//                    
+//                jQuery.each(exam,function(index, value){
+//                    // document.write(value);
+//                    
+//                    // create question div tag dynamically and append to 'test' div tag
+//                    var temp = jQuery("<div>");
+//                    temp.addClass("question");
+//                    temp.attr("id",index);
+//                    index = index + 1;
+////                    jQuery(temp).prepend("Question "+index);
+////                    temp.prepend("Question"+index);
+//                    value = value.replace('#','<b>Question-'+index+'</b><br/>');
+//                    temp.html(value);
+//                    jQuery('#test').append(temp);
+//                    
+//                    // create answer textarea dynamically and append to 'test' div tag
+//                    var answer = $("<textarea>");
+//                    answer.attr("id","answer"+index);
+//                    answer.addClass("answer");
+//                    answer.attr("rows","10");
+//                    answer.attr("cols","120");
+//                    jQuery('#test').append(answer);
+//                    
+////                    document.write(temp.text());
+////                    document.write(answer.);
+//
+//                    // Check if there is data already present in localstorage, if yes update the answers textarea
+//                    jQuery(function () {
+//                        var editor = document.querySelector("#answer"+index);
+//                        if (window.localStorage["answer"+index]) {
+//                         editor.value = window.localStorage["answer"+index];
+//                        }
+//                    });
+//                    
+//                    // Persisit answers in localstorage entered by user 
+//                    jQuery(function() {
+//                        var editor = document.querySelector("#answer"+index);
+//                        editor.addEventListener("keyup", function() {
+//                         window.localStorage["answer"+index] = editor.value;
+//                        });
+//                    });
+//                    
+//                });
+//                jQuery('#test').append("<br><br><br>");
+//                
+//                // create and append preview button to the 'test' div tag
+//                jQuery(function(){
+//                    var r= $('<input required id="sendmailbtn" type="button" value="\tShow Answers \t"/>');
+//                    jQuery('#test').append(r);
+//                });
+//                
+//                // append break points
+//                jQuery('#test').append("<br><br><br>");
+//                
+//                //  This function will get the answers stored in the local storage and 
+//                jQuery(function(){
+//                    jQuery("#sendmailbtn").click(function() {
+////                      alert( "Handler for .click() called." );
+//                        var answers = ""; 
+//                        // Iterate over the answers stored in localstorage and create a single string.
+//                        var noErrorAnswers="true";
+//                        var doAnswers="Please answer \r\n";
+//                        jQuery.each(exam,function(index, value){
+//                            index = index + 1;
+//                            var answer = "[[[<PRE>"+window.localStorage["answer"+index]+"</PRE>]]]";
+//                            // if(answer+"index".trim().length <= 0){
+//                            if(! $('#answer'+index).val().trim().length > 0){
+//                                //alert("The anwer for question_"+index +"is empty");
+//                                noErrorAnswers = "false";
+//                                doAnswers=doAnswers + "Question "+index+"\r\n";
+//                            }
+//                            answers = answers + answer + '<br>';
+//            
+//                         });
+//                        if(noErrorAnswers === 'true'){
+//                            // back button append to answers text
+//                            
+//                            var backlink = "<a href='index.html'> BACK TO QUESTIONS PAGE</a>";
+//                            answers = answers + backlink;
+//                            document.write(answers);  
+//                            // window.location = "https://mail.google.com/mail/?format=html&view=cm&fs=1&to=janardhanbonu@gmail.com&su=jQuery Final exam submission&body="+answers;
+//                            // alert(answers.toString());
+//
+//                        } else {
+//                            // back button append to answers text
+//                            alert(doAnswers);
+//                            var backlink = "<a href='index.html'> BACK TO QUESTIONS PAGE</a>";
+//                            answers = answers + backlink;
+//                            
+//                            // TODO Replace document.write with DIV tag, toggle with hide and show.
+//                            document.write(answers);  
+//                            // window.location = "https://mail.google.com/mail/?format=html&view=cm&fs=1&to=janardhanbonu@gmail.com&su=jQuery Final exam submission&body="+answers;
+//                            // alert(answers.toString());
+//                        }
+//                        
+//                        
+//                    });
+//                });
+                
+            });
+            
+         </script>
+	</head>
+	<body>
+            
+            <div id="header"><h1>header</h1></div>
+	
+            <div id="floating-box"></div>
+
+            <div id="body">
+                    <h1>content</h1>
+                    <h2>Mashable floating effect example</h2>
+            </div>
+            <div id="footer"><h1>footer</h1></div>
+	</body>
+        
+        
+</html>
