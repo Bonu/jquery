@@ -79,45 +79,46 @@
             "<p># This code crashes in demoClick.html</p>\n<pre>\nvar obj = $('.clickable');\nobj.click(foo).click(foo);\nPlease fix the problem.\n</pre>\n"
         ];
         
-        // jQuery(function () {
-//            var $floatingbox = $('#floating-box');
-//            var count = 0;
-//            $floatingbox.html("Question Remaining:"+ count);
-        // });
-        
         // TIMERRRRRRRRRRRR
         var d = new Date();
         var startTimeMin = d.getMinutes();
         var startTimeHour = d.getHours(); 
         var startTimeMinTotal = startTimeMin + (startTimeHour*60);
         
-        
-        
-        
         var examTimeInMin = 120 ;
-        
         
         var time =setInterval(function(){myTimer()},1000);
         
-        function myTimer()
-
-        {
+        function myTimer(){
             
         var d1 = new Date();
         var nowTimeMin = d1.getMinutes();
         var nowTimeHour = d1.getHours(); 
         var nowTimeMin = nowTimeMin + (nowTimeHour*60);
-            
-            console.log("x3"+nowTimeHour);
-            console.log("x2"+nowTimeMin);
-            
            var spentTime = nowTimeMin - startTimeMinTotal;
+         
+           // check if the spent is present in local storage.
+           // if yes, compare localstorage st with actual st.
+           // if st > lpt
+           //    update local storage with spent time
+           // else
+           //   put the localstorage time in acutal spent time.
+           //   
+             if (window.localStorage["spenttime"]) {
+                var localstoragespenttime = window.localStorage["spenttime"];
+                if(spentTime > localstoragespenttime){
+                    window.localStorage["spenttime"] = spentTime;
+                }else{
+                    spentTime = localstoragespenttime;
+                }
+             }else{
+                 window.localStorage["spenttime"] = spentTime;
+             }
            
-           if(spentTime<0)
+           
+           if(spentTime < 0)
            {
-               
                spentTime = (-1*spentTime);
-               
            }
            
            
@@ -135,61 +136,9 @@
         
            document.getElementById("demo").innerHTML = remainingTime; 
             
-            
-            
-            
-            
-            
-            
         }
         
         // END TIMERRRRRRRR 
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-//        
-//        
-//        var time =setInterval(function(){myTimer()},1000);
-//        // Now time
-//        var d1   = new Date();
-//      //  var startExamtime = d1.getTime;
-//        // exam start time to compare with actual time later. 
-//        var startExamtime =  d1.getMinutes()*60000;
-//        console.log("Start time"+startExamtime);
-//        var examTimeDuration = 120*60000;
-//        console.log("Duration"+examTimeDuration);
-//        function myTimer() {
-//          var d = new Date();
-//          //  document.getElementById("demo").innerHTML = d.toLocaleTimeString();
-//          
-//          var x = startExamtime - (d.getMinutes()*60000);
-//          var remainingTimeInMilliSeconds = examTimeDuration-x;
-//          console.log("x value->"+x);
-//          console.log("remainingTimeInMilliSeconds value->"+remainingTimeInMilliSeconds);
-//          
-//          hours = Math.round((remainingTimeInMilliSeconds / (60 * 60 * 1000)));
-//          mins = Math.round(((remainingTimeInMilliSeconds-(hours *60*60*1000) )/ (60 * 1000)));
-//          var remainingTime = hours + ":" + mins;
-//           console.log("hours->"+hours+": Mins ->"+mins);
-//        
-//        document.getElementById("demo").innerHTML = remainingTime; 
-//          
-//          
-//          
-//        }
-
-         // });
          
         // create instructions div tag dynamically and append to 'test' div tag
         jQuery(function () {
@@ -298,7 +247,18 @@
 	//this is the floating content
 	var $floatingbox = $('#floating-box');
 	
-        
+        //--------------fix-------------------
+	var countAnswers=exam.length;
+		jQuery.each(exam,function(index, value){
+                    index = index + 1;
+                    var answer2 = window.localStorage["answer"+index];
+                    if(answer2 == null || answer2 == ""){
+                    }else{
+                        countAnswers--;
+                    }
+                 });
+        $floatingbox.html("Questions Remaining:"+ countAnswers); 
+        //--------------fix-------------------
 	if($('#test').length > 0){
 	
 		var bodyY = parseInt($('#test').offset().top) - 20;
@@ -324,7 +284,7 @@
                          //   
                          //   
 //				$floatingbox.html("srollY : " + scrollY + ", bodyY : " + bodyY + ", isfixed : " + isfixed);
-                                $floatingbox.html("Question Remaining:"+ countAnswers+"<br><p id='demo'></p>");
+                                $floatingbox.html("Questions Remaining:"+ countAnswers+"<br><p id='demo'></p>");
                                 
 //                                $floatingbox.html("Question Remaining:----");
 				if ( scrollY > bodyY && !isfixed ) {
