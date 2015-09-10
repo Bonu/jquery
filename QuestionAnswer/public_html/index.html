@@ -4,6 +4,9 @@
     <script type="text/javascript" src="js/jQueryVersions/jquery-1.11.3.js"></script>
     <link rel="stylesheet" type="text/css" href="css/exam.css"></link>
 <style type="text/css">
+    .answerprovided{
+        background:#EFFBF5;
+    }
 	#floating-box{
 		width:120px;
 		height:200px;
@@ -44,7 +47,7 @@
         #sendmailbtn {
             font-size : 100px;
             width: 200px;
-            height: 500px;
+            height: 20px;
        }
 
 </style>
@@ -56,7 +59,6 @@
   	
 	<div id="floating-box"></div>
 	<div id="test"></div>
-	<p id="demo"></p>
 	
   </div>
 
@@ -78,76 +80,20 @@
             "<p># Put a breakpoint at line 27 jquery-0.3.js. What does this line do?</p>\n",
             "<p># This code crashes in demoClick.html</p>\n<pre>\nvar obj = $('.clickable');\nobj.click(foo).click(foo);\nPlease fix the problem.\n</pre>\n"
         ];
-        
-        // TIMERRRRRRRRRRRR
-        var d = new Date();
-        var startTimeMin = d.getMinutes();
-        var startTimeHour = d.getHours(); 
-        var startTimeMinTotal = startTimeMin + (startTimeHour*60);
-        
-        var examTimeInMin = 120 ;
-        
-        var time =setInterval(function(){myTimer()},1000);
-        
-        function myTimer(){
-            
-        var d1 = new Date();
-        var nowTimeMin = d1.getMinutes();
-        var nowTimeHour = d1.getHours(); 
-        var nowTimeMin = nowTimeMin + (nowTimeHour*60);
-           var spentTime = nowTimeMin - startTimeMinTotal;
-         
-           // check if the spent is present in local storage.
-           // if yes, compare localstorage st with actual st.
-           // if st > lpt
-           //    update local storage with spent time
-           // else
-           //   put the localstorage time in acutal spent time.
-           //   
-             if (window.localStorage["spenttime"]) {
-                var localstoragespenttime = window.localStorage["spenttime"];
-                if(spentTime > localstoragespenttime){
-                    window.localStorage["spenttime"] = spentTime;
-                }else{
-                    spentTime = localstoragespenttime;
-                }
-             }else{
-                 window.localStorage["spenttime"] = spentTime;
-             }
-           
-           
-           if(spentTime < 0)
-           {
-               spentTime = (-1*spentTime);
-           }
-           
-           
-           var remainingTimeInMinTotal = examTimeInMin - spentTime;
-           console.log("x55"+remainingTimeInMinTotal);
-           var remainingTimeInHour = Math.floor(remainingTimeInMinTotal/60);
-           console.log("x56"+remainingTimeInHour);
-           var remainingTimeInMin  = Math.round(remainingTimeInMinTotal%60);
-           console.log("x57"+remainingTimeInMin);
-           console.log("x1"+spentTime);
-           
-           
-           var remainingTime = remainingTimeInHour + ":" + remainingTimeInMin;
-           console.log("hours->"+remainingTimeInHour+": Mins ->"+remainingTimeInMin);
-        
-           document.getElementById("demo").innerHTML = remainingTime; 
-            
-        }
-        
-        // END TIMERRRRRRRR 
-         
-        // create instructions div tag dynamically and append to 'test' div tag
-        jQuery(function () {
-            var instructions = jQuery("<div>");
-                instructions.addClass("instructions");
-                instructions.attr("id","instructions");
-                instructions.html(instructionForSubmission);
-            jQuery('#test').append(instructions);    
-        }); 
+//        
+        var answers = [
+            "answer1 <foo>Foo fuction()</foo>",
+            "answer2",
+            "answer3",
+            "answer4",
+            "answer5",
+            "answer6",
+            "answer7",
+            "answer8",
+            "answer9",
+        ];
+      //  var answers = "";
+       
         
         jQuery.each(exam,function(index, value){
             
@@ -161,38 +107,55 @@
                     temp.html(value);
                     jQuery('#test').append(temp);
                     
-                    // create answer textarea dynamically and append to 'test' div tag
-                    var answer = $("<textarea>");
-                    answer.attr("id","answer"+index);
-                    answer.addClass("answer");
-                    answer.attr("rows","10");
-                    answer.attr("cols","120");
-                    
-                    jQuery('#test').append(answer);
-                    
-                    // Check if there is data already present in localstorage, if yes update the answers textarea
-                jQuery(function () {
-                    var editor = document.querySelector("#answer"+index);
-                    if (window.localStorage["answer"+index]) {
-                     editor.value = window.localStorage["answer"+index];
-                    }
-                });
+                    if(answers.length === 0){
+                        // create answer textarea dynamically and append to 'test' div tag
+                        var answer = $("<textarea>");
+                        answer.attr("id","answer"+index);
+                        answer.addClass("answer");
+                        answer.attr("rows","10");
+                        answer.attr("cols","120");
+                        jQuery('#test').append(answer);
+                        
+                        // Check if there is data already present in localstorage, if yes update the answers textarea
+                        jQuery(function () {
+                            var editor = document.querySelector("#answer"+index);
+                            if (window.localStorage["answer"+index]) {
+                             editor.value = window.localStorage["answer"+index];
+                            }
+                        });
 
-                // Persisit answers in localstorage entered by user 
-                jQuery(function() {
-                    var editor = document.querySelector("#answer"+index);
-                    editor.addEventListener("keyup", function() {
-//                  window.localStorage["answer"+index] = answer;
-                    });
-                });
+                        // Persisit answers in localstorage entered by user 
+                        jQuery(function() {
+                            var editor = document.querySelector("#answer"+index);
+                            editor.addEventListener("keyup", function() {
+                             window.localStorage["answer"+index] = editor.value;
+                            });
+                        });
+                    }else{
+                        var answer1 = $("<p>");
+                        answer1.attr("id","answer"+index);
+                        answer1.addClass("answerprovided");
+                        var ans1 = answers[index-1];
+                      
+                        var answer2 = $("<p>");
+                        answer2.attr("id","answerfinal");
+                        ans1 = ans1.replace(/>/g,'&gt;');
+                        ans1 = ans1.replace(/</g,'&lt;');
+                      
+                        answer1.html(ans1);
+                        jQuery('#test').append(answer1);
+                    }
+                    
+                    
         
         });
         
+        if(answers.length === 0){
         jQuery('#test').append("<br><br><br>");
 
         // create and append preview button to the 'test' div tag
         jQuery(function(){
-            var r= $('<input id="sendmailbtn" class="previewbutton" type="button" value="\tShow Answers \t"/>');
+            var r= $('<input id="sendmailbtn" class="previewbutton" type="button" value="Show Answers"/>');
             jQuery('#test').append(r);
         });
  
@@ -209,20 +172,26 @@
                 jQuery.each(exam,function(index, value){
                     index = index + 1;
                     var answer = window.localStorage["answer"+index];
-                    answer = answer.replace(/>/g,'&gt;');
-                    answer = answer.replace(/</g,'&lt;');
-                    
-                    // s = s.replace(/</g, "&lt;");
-                    // jQuery("editor").html(jQuery("editor").html().replace('>','&gt;'));
-                    
                    
                     if (answer == null || answer == "") {
                         //alert("The anwer for question_"+index +"is empty");
                         noErrorAnswers = "false";
                         doAnswers=doAnswers + "Question "+index+"\r\n";
+                    } else {
+                        var answer = window.localStorage["answer"+index];
+                        //---------------------------------------------
+                        var answer2 = $("<p>");
+                        answer2.attr("id","answerfinal");
+                        answer = answer.replace(/>/g,'&gt;');
+                        answer = answer.replace(/</g,'&lt;');
+                        answer2.html(answer);
+                        jQuery('#test').append(answer2);
+                        
+                        //---------------------------------------------
+//                       
+                        answer = "[[[<PRE>"+answer+"</PRE>]]]";
+                        answers = answers + answer + '<br>';
                     }
-                    answer = "[[[<PRE>"+answer+"</PRE>]]]";
-                    answers = answers + answer + '<br>';
 
                  });
                 if(noErrorAnswers === 'true'){
@@ -253,8 +222,7 @@
         
 	//this is the floating content
 	var $floatingbox = $('#floating-box');
-	
-        //--------------fix-------------------
+	//--------------fix-------------------
 	var countAnswers=exam.length;
 		jQuery.each(exam,function(index, value){
                     index = index + 1;
@@ -264,21 +232,21 @@
                         countAnswers--;
                     }
                  });
-        $floatingbox.html("Questions Remaining:"+ countAnswers); 
-        //--------------fix-------------------
+    $floatingbox.html("Question Remaining:"+ countAnswers); 
+    //--------------fix-------------------
 	if($('#test').length > 0){
 	
 		var bodyY = parseInt($('#test').offset().top) - 20;
 		var originalX = $floatingbox.css('margin-right');
 	
 		$(window).scroll(function () { 
-		  var countAnswers=exam.length;
-                
+		 
+                var countAnswers1=exam.length;
                 jQuery.each(exam,function(index, value){
                     index = index + 1;
                     if($('#answer'+index).val().trim().length <= 0){
                     }else{
-                        countAnswers--;
+                        countAnswers1--;
                     }
                  });
                  
@@ -286,13 +254,9 @@
 			var isfixed = $floatingbox.css('position') == 'fixed';
 			
 			if($floatingbox.length > 0){
-				
-                        var dt = new Date();
-                         //   
-                         //   
-//				$floatingbox.html("srollY : " + scrollY + ", bodyY : " + bodyY + ", isfixed : " + isfixed);
-                                $floatingbox.html("Questions Remaining:"+ countAnswers+"<br><p id='demo'></p>");
-                                
+			
+				$floatingbox.html("srollY : " + scrollY + ", bodyY : " + bodyY + ", isfixed : " + isfixed);
+                                $floatingbox.html("Question Remaining:"+ countAnswers1);
 //                                $floatingbox.html("Question Remaining:----");
 				if ( scrollY > bodyY && !isfixed ) {
 					$floatingbox.stop().css({
@@ -315,8 +279,19 @@
 	
 		});
 	}
+         // create instructions div tag dynamically and append to 'test' div tag
+        jQuery(function () {
+            var instructions = jQuery("<div>");
+                instructions.addClass("instructions");
+                instructions.attr("id","instructions");
+                instructions.html(instructionForSubmission);
+            jQuery('#test').append(instructions);    
+        }); 
+    }else{
+        
+    }
 });
-
+    
 	
 	
 </script>
