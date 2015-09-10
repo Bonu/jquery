@@ -1,21 +1,43 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html>
-    <head>
-        <title>Final Exam - Preview</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        
-    </head>
-    <body>
-        
-        <div id="divquestion1">Question 1</div>
-        <div id="divanswer1">
-            <textarea id="inputAnswer1" rows="4" cols="40" ></textarea>
-        </div>
-    </body>
+<body>
+
+<p>Click the button to display the minutes of the time right now.</p>
+
+<button onclick="myFunction()">Try it</button>
+
+
+
+<script>
+function myFunction() {
+
+var starttime = new Date(2015,09,09,22,00,00);
+var starttimedisplay = starttime.getHours() + ":" + starttime.getMinutes() + ":" + starttime.getSeconds();
+//document.getElementById("starttime").innerHTML = starttimedisplay;
+
+var starttimeinminutes = (starttime.getHours() * 60) + (starttime.getMinutes());
+// document.write(starttimeinminutes);
+var now1 = new Date();
+var nowtime = now1.getHours() + ":" + now1.getMinutes() + ":" + now1.getSeconds();
+//document.getElementById("now").innerHTML = nowtime;
+
+var nowtimeinmins = (now1.getHours() * 60) + (now1.getMinutes());
+// document.write(nowtimeinmins);
+
+
+timepsent1  = nowtimeinmins - starttimeinminutes;
+
+document.write(timespent1);
+var examdurationinmins = 150;
+var remainingtimeinmins = 0;
+
+
+
+
+ 
+
+}
+</script>
+
+</body>
 </html>
